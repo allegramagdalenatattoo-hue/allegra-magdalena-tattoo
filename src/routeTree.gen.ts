@@ -9,38 +9,119 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TattoosRouteImport } from './routes/tattoos'
+import { Route as ShopRouteImport } from './routes/shop'
+import { Route as FlashRouteImport } from './routes/flash'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FlashIndexRouteImport } from './routes/flash.index'
+import { Route as FlashCategoryRouteImport } from './routes/flash.$category'
 
+const TattoosRoute = TattoosRouteImport.update({
+  id: '/tattoos',
+  path: '/tattoos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FlashRoute = FlashRouteImport.update({
+  id: '/flash',
+  path: '/flash',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FlashIndexRoute = FlashIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FlashRoute,
+} as any)
+const FlashCategoryRoute = FlashCategoryRouteImport.update({
+  id: '/$category',
+  path: '/$category',
+  getParentRoute: () => FlashRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/flash': typeof FlashRouteWithChildren
+  '/shop': typeof ShopRoute
+  '/tattoos': typeof TattoosRoute
+  '/flash/$category': typeof FlashCategoryRoute
+  '/flash/': typeof FlashIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/shop': typeof ShopRoute
+  '/tattoos': typeof TattoosRoute
+  '/flash/$category': typeof FlashCategoryRoute
+  '/flash': typeof FlashIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/flash': typeof FlashRouteWithChildren
+  '/shop': typeof ShopRoute
+  '/tattoos': typeof TattoosRoute
+  '/flash/$category': typeof FlashCategoryRoute
+  '/flash/': typeof FlashIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/flash'
+    | '/shop'
+    | '/tattoos'
+    | '/flash/$category'
+    | '/flash/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/shop' | '/tattoos' | '/flash/$category' | '/flash'
+  id:
+    | '__root__'
+    | '/'
+    | '/flash'
+    | '/shop'
+    | '/tattoos'
+    | '/flash/$category'
+    | '/flash/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FlashRoute: typeof FlashRouteWithChildren
+  ShopRoute: typeof ShopRoute
+  TattoosRoute: typeof TattoosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tattoos': {
+      id: '/tattoos'
+      path: '/tattoos'
+      fullPath: '/tattoos'
+      preLoaderRoute: typeof TattoosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/flash': {
+      id: '/flash'
+      path: '/flash'
+      fullPath: '/flash'
+      preLoaderRoute: typeof FlashRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +129,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/flash/': {
+      id: '/flash/'
+      path: '/'
+      fullPath: '/flash/'
+      preLoaderRoute: typeof FlashIndexRouteImport
+      parentRoute: typeof FlashRoute
+    }
+    '/flash/$category': {
+      id: '/flash/$category'
+      path: '/$category'
+      fullPath: '/flash/$category'
+      preLoaderRoute: typeof FlashCategoryRouteImport
+      parentRoute: typeof FlashRoute
+    }
   }
 }
 
+interface FlashRouteChildren {
+  FlashCategoryRoute: typeof FlashCategoryRoute
+  FlashIndexRoute: typeof FlashIndexRoute
+}
+
+const FlashRouteChildren: FlashRouteChildren = {
+  FlashCategoryRoute: FlashCategoryRoute,
+  FlashIndexRoute: FlashIndexRoute,
+}
+
+const FlashRouteWithChildren = FlashRoute._addFileChildren(FlashRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FlashRoute: FlashRouteWithChildren,
+  ShopRoute: ShopRoute,
+  TattoosRoute: TattoosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
