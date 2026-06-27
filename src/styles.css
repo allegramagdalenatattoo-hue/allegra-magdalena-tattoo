@@ -54,6 +54,7 @@
   --foreground: oklch(0.12 0 0);
   --ink: oklch(0.12 0 0);
   --accent: oklch(0.68 0.22 27);
+  --accent-foreground: oklch(0.96 0.01 80);
   --accent-2: oklch(0.86 0.24 130);
   --accent-3: oklch(0.78 0.18 320);
   --color-accent-2: var(--accent-2);
