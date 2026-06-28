@@ -118,8 +118,6 @@ function Index() {
         </div>
       </section>
 
-      <CatStrip />
-
       {/* PRÉSENTATION TRILINGUE */}
       <section className="border-b-2 border-ink relative">
         <div className="absolute -top-5 left-8 z-10 bg-ink text-paper px-3 py-1 font-mono text-xs uppercase rotate-[-3deg] border-2 border-ink">
