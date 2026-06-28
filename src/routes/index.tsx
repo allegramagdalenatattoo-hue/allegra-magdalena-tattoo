@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Instagram, Mail, ArrowRight } from "lucide-react";
 import { SiteShell, IG_URL, EMAIL } from "@/components/SiteShell";
-import { CatStrip, CAT_GIFS } from "@/components/CatGifs";
+import { CAT_GIFS } from "@/components/CatGifs";
 import hero from "@/assets/hero.jpg";
 
 export const Route = createFileRoute("/")({
