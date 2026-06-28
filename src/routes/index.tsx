@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Instagram, Mail, ArrowRight } from "lucide-react";
 import { SiteShell, IG_URL, EMAIL } from "@/components/SiteShell";
+import { CatStrip, CAT_GIFS } from "@/components/CatGifs";
 import hero from "@/assets/hero.jpg";
 
 export const Route = createFileRoute("/")({
@@ -105,8 +106,19 @@ function Index() {
               ▶ live · atelier
             </motion.div>
           </motion.div>
+          {/* inline cats on hero corner */}
+          <motion.img
+            src={CAT_GIFS[5].url}
+            alt=""
+            initial={{ scale: 0 }}
+            animate={{ scale: 1, rotate: [0, 8, -8, 0] }}
+            transition={{ rotate: { duration: 3, repeat: Infinity } }}
+            className="absolute -bottom-6 left-1/2 -translate-x-1/2 lg:left-[55%] w-24 h-24 z-20 pointer-events-none"
+          />
         </div>
       </section>
+
+      <CatStrip />
 
       {/* PRÉSENTATION TRILINGUE */}
       <section className="border-b-2 border-ink relative">
@@ -159,6 +171,8 @@ function Index() {
           ))}
         </div>
       </section>
+
+      <CatStrip reverse />
 
       {/* CONTACT FICHE */}
       <section id="contact" className="p-6 md:p-12 lg:p-16 relative overflow-hidden">
