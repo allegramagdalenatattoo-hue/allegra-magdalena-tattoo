@@ -47,7 +47,7 @@ function Index() {
             >
               ⟶ Tattoo artist · since 2019 · TLV
             </motion.div>
-            <h1 className="font-display uppercase text-[18vw] lg:text-[10vw] leading-[0.82] tracking-tighter">
+            <h1 className="font-display uppercase text-[13vw] lg:text-[10vw] leading-[0.82] tracking-tighter">
               <motion.span
                 initial={{ x: -60, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
