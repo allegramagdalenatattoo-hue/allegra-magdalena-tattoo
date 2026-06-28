@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Instagram, Mail, Asterisk } from "lucide-react";
 import { type ReactNode, useState } from "react";
+import { FloatingCats } from "@/components/CatGifs";
 
 const NAV = [
   { to: "/", label: "ACCUEIL" },
@@ -60,6 +61,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
     <div className="relative min-h-screen bg-paper text-ink flex flex-col">
       {/* grain overlay */}
       <div className="pointer-events-none fixed inset-0 z-50 noise-bg opacity-[0.18] mix-blend-multiply" />
+      <FloatingCats />
       {/* floating sticker */}
       <motion.a
         href={IG_URL}
