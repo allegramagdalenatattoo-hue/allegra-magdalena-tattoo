@@ -33,61 +33,54 @@ export function CatGif({
   );
 }
 
-// Floating cats scattered with random rotations, draggable/animated
+// Scattered cats all over the viewport — visible on every page, mobile included
 export function FloatingCats() {
   const cats = [
-    { src: cat1.url, top: "12%", left: "4%", size: 80, rot: -8, delay: 0 },
-    { src: cat2.url, top: "70%", left: "2%", size: 110, rot: 6, delay: 0.4 },
-    { src: cat3.url, top: "30%", right: "3%", size: 85, rot: 10, delay: 0.8 },
-    { src: cat4.url, top: "82%", right: "5%", size: 90, rot: -12, delay: 1.2 },
-    { src: cat8.url, top: "45%", left: "1%", size: 95, rot: 4, delay: 0.6 },
-    { src: cat10.url, top: "55%", right: "1%", size: 90, rot: -6, delay: 1 },
+    { src: cat1.url, top: "8%",  left: "3%",  size: 70,  rot: -12, delay: 0,    dur: 2.8 },
+    { src: cat2.url, top: "65%", left: "2%",  size: 100, rot: 8,   delay: 0.3,  dur: 3.5 },
+    { src: cat3.url, top: "25%", right: "4%", size: 65,  rot: 14,  delay: 0.6,  dur: 2.4 },
+    { src: cat4.url, top: "78%", right: "6%", size: 80,  rot: -18, delay: 0.9,  dur: 3.2 },
+    { src: cat5.url, top: "42%", left: "5%",  size: 50,  rot: 22,  delay: 1.2,  dur: 2.1 },
+    { src: cat6.url, top: "12%", right: "15%",size: 120, rot: -6,  delay: 0.5,  dur: 4.0 },
+    { src: cat7.url, top: "55%", right: "2%", size: 75,  rot: 5,   delay: 1.5,  dur: 2.6 },
+    { src: cat8.url, top: "88%", left: "30%", size: 90,  rot: -10, delay: 0.8,  dur: 3.0 },
+    { src: cat9.url, top: "35%", left: "45%", size: 85,  rot: 16,  delay: 1.1,  dur: 3.3 },
+    { src: cat10.url,top: "18%", left: "75%", size: 95,  rot: -4,  delay: 0.2,  dur: 3.8 },
   ] as const;
+
   return (
-    <div className="pointer-events-none fixed inset-0 z-30 hidden lg:block">
+    <div className="pointer-events-none fixed inset-0 z-30">
       {cats.map((c, i) => (
         <motion.img
           key={i}
           src={c.src}
           alt=""
-          initial={{ opacity: 0, scale: 0.6, rotate: c.rot }}
+          initial={{ opacity: 0, scale: 0.5, rotate: c.rot }}
           animate={{
             opacity: 1,
-            scale: 1,
-            rotate: [c.rot - 6, c.rot + 6, c.rot - 6],
-            y: [0, -14, 0],
+            scale: [0.9, 1.05, 0.9],
+            rotate: [c.rot - 10, c.rot + 10, c.rot - 10],
+            x: [0, 10, -8, 0],
+            y: [0, -18, 8, 0],
           }}
           transition={{
-            opacity: { duration: 0.6, delay: c.delay },
-            scale: { duration: 0.6, delay: c.delay },
-            rotate: { duration: 4 + i, repeat: Infinity, ease: "easeInOut" },
-            y: { duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut" },
+            opacity: { duration: 0.5, delay: c.delay },
+            scale: { duration: c.dur, repeat: Infinity, ease: "easeInOut" },
+            rotate: { duration: c.dur * 0.8, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: c.dur * 1.2, repeat: Infinity, ease: "easeInOut" },
+            y: { duration: c.dur, repeat: Infinity, ease: "easeInOut" },
           }}
           style={{
             position: "absolute",
-            top: (c as any).top,
+            top: c.top,
             left: (c as any).left,
             right: (c as any).right,
             width: c.size,
             height: c.size,
           }}
-          className="object-contain drop-shadow-[4px_4px_0_var(--color-ink)]"
+          className="object-contain drop-shadow-[3px_3px_0_var(--color-ink)]"
         />
       ))}
-    </div>
-  );
-}
-
-// Strip of cats for marquee-style decorations
-export function CatStrip({ reverse = false }: { reverse?: boolean }) {
-  const row = [...CAT_GIFS, ...CAT_GIFS];
-  return (
-    <div className="overflow-hidden border-y-2 border-ink bg-[var(--accent-3)] py-2">
-      <div className={`flex gap-6 whitespace-nowrap ${reverse ? "animate-marquee-rev" : "animate-marquee"}`}>
-        {row.map((c, i) => (
-          <img key={i} src={c.url} alt="" className="h-16 w-16 object-contain shrink-0" />
-        ))}
-      </div>
     </div>
   );
 }
