@@ -170,8 +170,6 @@ function Index() {
         </div>
       </section>
 
-      <CatStrip reverse />
-
       {/* CONTACT FICHE */}
       <section id="contact" className="p-6 md:p-12 lg:p-16 relative overflow-hidden">
         <motion.div
