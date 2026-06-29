@@ -108,7 +108,7 @@ function Index() {
           </motion.div>
           {/* inline cats on hero corner */}
           <motion.img
-            src={CAT_GIFS[5].url}
+            src={CAT_GIFS[0].url}
             alt=""
             initial={{ scale: 0 }}
             animate={{ scale: 1, rotate: [0, 8, -8, 0] }}
