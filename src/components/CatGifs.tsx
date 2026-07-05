@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import cat from "@/assets/cats/giphy-11.gif.asset.json";
 
 export const CAT_GIFS = [cat];
@@ -24,54 +25,75 @@ export function CatGif({
   );
 }
 
-// Scattered cats — same GIF (kitten with sparkly eyes) repeated across the viewport
+type Star = { id: number; x: number; y: number; rot: number; char: string };
+
+// A single cat that follows the mouse, trailing sparkly stars behind it.
 export function FloatingCats() {
-  const cats = [
-    { top: "8%",  left: "3%",  size: 70,  rot: -12, delay: 0,    dur: 2.8 },
-    { top: "65%", left: "2%",  size: 100, rot: 8,   delay: 0.3,  dur: 3.5 },
-    { top: "25%", right: "4%", size: 65,  rot: 14,  delay: 0.6,  dur: 2.4 },
-    { top: "78%", right: "6%", size: 80,  rot: -18, delay: 0.9,  dur: 3.2 },
-    { top: "42%", left: "5%",  size: 55,  rot: 22,  delay: 1.2,  dur: 2.1 },
-    { top: "12%", right: "15%",size: 120, rot: -6,  delay: 0.5,  dur: 4.0 },
-    { top: "55%", right: "2%", size: 75,  rot: 5,   delay: 1.5,  dur: 2.6 },
-    { top: "88%", left: "30%", size: 90,  rot: -10, delay: 0.8,  dur: 3.0 },
-    { top: "35%", left: "45%", size: 85,  rot: 16,  delay: 1.1,  dur: 3.3 },
-    { top: "18%", left: "75%", size: 95,  rot: -4,  delay: 0.2,  dur: 3.8 },
-  ] as const;
+  const [pos, setPos] = useState<{ x: number; y: number }>({ x: -200, y: -200 });
+  const [stars, setStars] = useState<Star[]>([]);
+  const idRef = useRef(0);
+  const lastStarRef = useRef(0);
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      setPos({ x: e.clientX, y: e.clientY });
+      const now = performance.now();
+      if (now - lastStarRef.current > 60) {
+        lastStarRef.current = now;
+        const id = ++idRef.current;
+        const chars = ["✦", "✧", "★", "✩", "✷", "✸"];
+        const star: Star = {
+          id,
+          x: e.clientX + (Math.random() * 30 - 15),
+          y: e.clientY + (Math.random() * 30 - 15),
+          rot: Math.random() * 360,
+          char: chars[Math.floor(Math.random() * chars.length)],
+        };
+        setStars((s) => [...s.slice(-24), star]);
+        window.setTimeout(() => {
+          setStars((s) => s.filter((x) => x.id !== id));
+        }, 900);
+      }
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-30">
-      {cats.map((c, i) => (
-        <motion.img
-          key={i}
-          src={cat.url}
-          alt=""
-          initial={{ opacity: 0, scale: 0.5, rotate: c.rot }}
-          animate={{
-            opacity: 1,
-            scale: [0.9, 1.05, 0.9],
-            rotate: [c.rot - 10, c.rot + 10, c.rot - 10],
-            x: [0, 10, -8, 0],
-            y: [0, -18, 8, 0],
-          }}
-          transition={{
-            opacity: { duration: 0.5, delay: c.delay },
-            scale: { duration: c.dur, repeat: Infinity, ease: "easeInOut" },
-            rotate: { duration: c.dur * 0.8, repeat: Infinity, ease: "easeInOut" },
-            x: { duration: c.dur * 1.2, repeat: Infinity, ease: "easeInOut" },
-            y: { duration: c.dur, repeat: Infinity, ease: "easeInOut" },
-          }}
-          style={{
-            position: "absolute",
-            top: c.top,
-            left: (c as any).left,
-            right: (c as any).right,
-            width: c.size,
-            height: c.size,
-          }}
-          className="object-contain drop-shadow-[3px_3px_0_var(--color-ink)]"
-        />
-      ))}
+    <div className="pointer-events-none fixed inset-0 z-40">
+      <AnimatePresence>
+        {stars.map((s) => (
+          <motion.span
+            key={s.id}
+            initial={{ opacity: 1, scale: 0.4, rotate: s.rot }}
+            animate={{ opacity: 0, scale: 1.3, rotate: s.rot + 120, y: s.y - 30 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            style={{
+              position: "absolute",
+              left: s.x,
+              top: s.y,
+              color: "var(--color-accent)",
+              textShadow: "2px 2px 0 var(--color-ink)",
+            }}
+            className="font-display text-xl select-none"
+          >
+            {s.char}
+          </motion.span>
+        ))}
+      </AnimatePresence>
+      <motion.img
+        src={cat.url}
+        alt=""
+        animate={{ x: pos.x - 40, y: pos.y - 40, rotate: [0, 6, -6, 0] }}
+        transition={{
+          x: { type: "spring", stiffness: 120, damping: 18, mass: 0.6 },
+          y: { type: "spring", stiffness: 120, damping: 18, mass: 0.6 },
+          rotate: { duration: 2.4, repeat: Infinity, ease: "easeInOut" },
+        }}
+        style={{ position: "absolute", width: 80, height: 80, top: 0, left: 0 }}
+        className="object-contain drop-shadow-[3px_3px_0_var(--color-ink)]"
+      />
     </div>
   );
 }
