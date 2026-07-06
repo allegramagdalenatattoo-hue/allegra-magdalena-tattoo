@@ -12,8 +12,10 @@ export const Route = createFileRoute("/shop")({
       { name: "description", content: "Dessins originaux et objets en vente. Pour commander : DM Instagram ou email." },
       { property: "og:title", content: "Shop — Allegra Magdalena" },
       { property: "og:description", content: "Dessins originaux et objets en édition limitée." },
+      { property: "og:url", content: "https://allegra-ink-flash.lovable.app/shop" },
       { property: "og:image", content: CATEGORIES[1].cover },
     ],
+    links: [{ rel: "canonical", href: "https://allegra-ink-flash.lovable.app/shop" }],
   }),
   component: Shop,
 });
