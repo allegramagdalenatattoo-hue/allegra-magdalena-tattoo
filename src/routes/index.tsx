@@ -12,8 +12,10 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Tatouages fine line, flash et compositions. FR · EN · עברית." },
       { property: "og:title", content: "Allegra Magdalena — Tattoo Artist" },
       { property: "og:description", content: "Tatouages fine line, flash et compositions." },
+      { property: "og:url", content: "https://allegra-ink-flash.lovable.app/" },
       { property: "og:image", content: hero },
     ],
+    links: [{ rel: "canonical", href: "https://allegra-ink-flash.lovable.app/" }],
   }),
   component: Index,
 });
