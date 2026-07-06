@@ -1,0 +1,17 @@
+# Allegra Magdalena
+
+> Portfolio et site de réservation d'Allegra Magdalena, tatoueuse spécialisée en fine line, flash et compositions. Basée à Paris et Tel Aviv.
+
+Allegra Magdalena est une tatoueuse active depuis 2019. Son travail explore les lignes fines, les corps, les plantes et les compositions denses. Le site est bilingue français / anglais / hébreu. Les réservations se font par email ou DM Instagram.
+
+## Pages
+
+- [/](/): Page d'accueil — présentation trilingue, fiche contact, liens vers les flash et la galerie.
+- [/tattoos](/tattoos): Galerie de tatouages réalisés — fine line, botanique, figures et compositions.
+- [/flash](/flash): Catalogue de dessins flash disponibles, organisés par catégorie.
+- [/flash/nudite](/flash/nudite): Flash sur le thème de la nudité.
+- [/flash/botanique](/flash/botanique): Flash sur le thème botanique.
+- [/flash/corps](/flash/corps): Flash sur le thème du corps.
+- [/flash/composition](/flash/composition): Flash compositions et figures.
+- [/flash/animaux](/flash/animaux): Flash sur le thème des animaux.
+- [/shop](/shop): Vitrine — dessins originaux, prints en édition limitée et objets. DM ou email pour commander.
