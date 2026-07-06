@@ -10,7 +10,7 @@ export const Route = createFileRoute("/flash/$category")({
     if (!cat) throw notFound();
     return { cat };
   },
-  head: ({ loaderData }) =>
+  head: ({ loaderData, params }) =>
     loaderData
       ? {
           meta: [
@@ -18,8 +18,10 @@ export const Route = createFileRoute("/flash/$category")({
             { name: "description", content: loaderData.cat.desc },
             { property: "og:title", content: `Flash · ${loaderData.cat.title}` },
             { property: "og:description", content: loaderData.cat.desc },
+            { property: "og:url", content: `https://allegra-ink-flash.lovable.app/flash/${params.category}` },
             { property: "og:image", content: loaderData.cat.cover },
           ],
+          links: [{ rel: "canonical", href: `https://allegra-ink-flash.lovable.app/flash/${params.category}` }],
         }
       : {},
   notFoundComponent: () => (
