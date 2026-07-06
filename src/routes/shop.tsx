@@ -70,7 +70,7 @@ function Shop() {
                   <h2 className="font-display uppercase text-xl leading-none">{it.title}</h2>
                   <span className="font-display text-2xl shrink-0">{it.price}</span>
                 </div>
-                <p className="font-mono text-xs opacity-60 mt-2">{it.edition}</p>
+                <p className="font-mono text-xs opacity-80 mt-2">{it.edition}</p>
                 <a
                   href={`mailto:${EMAIL}?subject=Shop%20-%20${encodeURIComponent(it.title)}`}
                   className="mt-4 block text-center border-2 border-ink px-4 py-2 font-mono text-xs uppercase hover:bg-ink hover:text-paper"

@@ -70,7 +70,7 @@ function Tattoos() {
               <figcaption className="flex items-baseline justify-between p-4">
                 <div>
                   <div className="font-display uppercase text-xl leading-none">{it.title}</div>
-                  <div className="font-mono text-xs opacity-60 mt-1">{it.placement}</div>
+                  <div className="font-mono text-xs opacity-80 mt-1">{it.placement}</div>
                 </div>
                 <div className="font-mono text-xs">{it.year}</div>
               </figcaption>
