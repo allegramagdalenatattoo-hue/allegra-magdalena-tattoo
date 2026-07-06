@@ -189,7 +189,7 @@ function Index() {
           <div className="lg:col-span-5 brutal-border brutal-shadow-lime p-6 md:p-8 bg-paper rotate-[-1.5deg] hover:rotate-0 transition-transform">
             <dl className="font-mono text-sm space-y-4">
               <div>
-                <dt className="uppercase text-xs opacity-60">Email</dt>
+                <dt className="uppercase text-xs opacity-80">Email</dt>
                 <dd className="mt-1">
                   <a href={`mailto:${EMAIL}`} className="underline decoration-2 underline-offset-4 hover:text-accent break-all">
                     {EMAIL}
@@ -197,7 +197,7 @@ function Index() {
                 </dd>
               </div>
               <div>
-                <dt className="uppercase text-xs opacity-60">Instagram</dt>
+                <dt className="uppercase text-xs opacity-80">Instagram</dt>
                 <dd className="mt-1">
                   <a href={IG_URL} target="_blank" rel="noreferrer" className="underline decoration-2 underline-offset-4 hover:text-accent">
                     @tal_allegra_magdalena
@@ -205,11 +205,11 @@ function Index() {
                 </dd>
               </div>
               <div>
-                <dt className="uppercase text-xs opacity-60">Réservations</dt>
+                <dt className="uppercase text-xs opacity-80">Réservations</dt>
                 <dd className="mt-1">DM Instagram ou email. Réponse sous 48h.</dd>
               </div>
               <div>
-                <dt className="uppercase text-xs opacity-60">Languages</dt>
+                <dt className="uppercase text-xs opacity-80">Languages</dt>
                 <dd className="mt-1">Français · English · עברית</dd>
               </div>
             </dl>
