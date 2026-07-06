@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TattoosRouteImport } from './routes/tattoos'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as FlashRouteImport } from './routes/flash'
 import { Route as IndexRouteImport } from './routes/index'
@@ -19,6 +20,11 @@ import { Route as FlashCategoryRouteImport } from './routes/flash.$category'
 const TattoosRoute = TattoosRouteImport.update({
   id: '/tattoos',
   path: '/tattoos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/flash': typeof FlashRouteWithChildren
   '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tattoos': typeof TattoosRoute
   '/flash/$category': typeof FlashCategoryRoute
   '/flash/': typeof FlashIndexRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tattoos': typeof TattoosRoute
   '/flash/$category': typeof FlashCategoryRoute
   '/flash': typeof FlashIndexRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/flash': typeof FlashRouteWithChildren
   '/shop': typeof ShopRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tattoos': typeof TattoosRoute
   '/flash/$category': typeof FlashCategoryRoute
   '/flash/': typeof FlashIndexRoute
@@ -77,16 +86,24 @@ export interface FileRouteTypes {
     | '/'
     | '/flash'
     | '/shop'
+    | '/sitemap.xml'
     | '/tattoos'
     | '/flash/$category'
     | '/flash/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/shop' | '/tattoos' | '/flash/$category' | '/flash'
+  to:
+    | '/'
+    | '/shop'
+    | '/sitemap.xml'
+    | '/tattoos'
+    | '/flash/$category'
+    | '/flash'
   id:
     | '__root__'
     | '/'
     | '/flash'
     | '/shop'
+    | '/sitemap.xml'
     | '/tattoos'
     | '/flash/$category'
     | '/flash/'
@@ -96,6 +113,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FlashRoute: typeof FlashRouteWithChildren
   ShopRoute: typeof ShopRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TattoosRoute: typeof TattoosRoute
 }
 
@@ -106,6 +124,13 @@ declare module '@tanstack/react-router' {
       path: '/tattoos'
       fullPath: '/tattoos'
       preLoaderRoute: typeof TattoosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -162,6 +187,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FlashRoute: FlashRouteWithChildren,
   ShopRoute: ShopRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TattoosRoute: TattoosRoute,
 }
 export const routeTree = rootRouteImport
