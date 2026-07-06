@@ -11,8 +11,10 @@ export const Route = createFileRoute("/flash/")({
       { name: "description", content: "Propositions de dessins flash disponibles : nudité, botanique, corps, composition, animaux." },
       { property: "og:title", content: "Flash — Allegra Magdalena" },
       { property: "og:description", content: "Dessins flash disponibles à tatouer." },
+      { property: "og:url", content: "https://allegra-ink-flash.lovable.app/flash" },
       { property: "og:image", content: CATEGORIES[3].cover },
     ],
+    links: [{ rel: "canonical", href: "https://allegra-ink-flash.lovable.app/flash" }],
   }),
   component: FlashIndex,
 });
