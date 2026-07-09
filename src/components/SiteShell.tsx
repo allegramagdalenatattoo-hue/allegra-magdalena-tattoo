@@ -131,7 +131,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <Marquee variant="accent" reverse />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6 md:p-12 bg-ink text-paper">
           <div>
-            <h3 className="font-display text-4xl uppercase animate-glitch">Allegra<br/>Magdalena</h3>
+            <h2 className="font-display text-4xl uppercase animate-glitch">Allegra<br/>Magdalena</h2>
             <p className="mt-2 font-mono text-sm opacity-80">Tattoo artist · אמנית קעקועים</p>
           </div>
           <div className="font-mono text-sm space-y-2">
