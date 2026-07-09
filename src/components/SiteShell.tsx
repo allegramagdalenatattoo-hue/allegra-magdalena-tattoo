@@ -92,8 +92,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 {n.label}
               </Link>
             ))}
-            <a href={IG_URL} target="_blank" rel="noreferrer" className="ml-2 px-3 py-2 border-2 border-ink hover:bg-accent hover:border-accent hover:text-paper transition-colors animate-wobble">
-              <Instagram className="w-4 h-4" />
+            <a href={IG_URL} target="_blank" rel="noreferrer" aria-label="Instagram — @tal_allegra_magdalena" className="ml-2 px-3 py-2 border-2 border-ink hover:bg-accent hover:border-accent hover:text-paper transition-colors animate-wobble">
+              <Instagram className="w-4 h-4" aria-hidden="true" />
             </a>
           </nav>
           <button onClick={() => setOpen(!open)} className="md:hidden border-2 border-ink px-3 py-2 font-mono text-sm uppercase animate-jitter">
