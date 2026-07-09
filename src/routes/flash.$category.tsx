@@ -80,7 +80,7 @@ function FlashCategory() {
             <p className="mt-4 max-w-xl font-mono text-sm">{cat.desc}</p>
           </div>
           <div className="lg:col-span-5 brutal-border p-4">
-            <img src={cat.cover} alt={cat.title} className="w-full h-64 object-cover border-b-2 border-ink" width={1024} height={1024} loading="lazy" />
+            <img src={cat.cover} alt={`Planche cover flash ${cat.title.toLowerCase()} — ${cat.count} dessins disponibles`} className="w-full h-64 object-cover border-b-2 border-ink" width={1024} height={1024} loading="lazy" />
             <div className="font-mono text-xs uppercase pt-3 flex justify-between">
               <span>{cat.count} pièces</span>
               <span>Cover sheet</span>
