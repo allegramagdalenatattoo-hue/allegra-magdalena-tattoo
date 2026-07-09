@@ -69,7 +69,7 @@ function FlashIndex() {
                 <div className="relative overflow-hidden border-b-2 border-ink aspect-[4/3] bg-paper">
                   <motion.img
                     src={c.cover}
-                    alt={c.title}
+                    alt={`Flash tatouage ${c.title.toLowerCase()} — planche cover ${c.count} pièces`}
                     loading="lazy"
                     width={1024}
                     height={1024}
