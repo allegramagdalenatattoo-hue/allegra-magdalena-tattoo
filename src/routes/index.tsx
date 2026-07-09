@@ -16,6 +16,24 @@ export const Route = createFileRoute("/")({
       { property: "og:image", content: hero },
     ],
     links: [{ rel: "canonical", href: "https://allegra-ink-flash.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Allegra Magdalena",
+          alternateName: "אלגרה מגדלנה",
+          jobTitle: "Tattoo Artist",
+          url: "https://allegra-ink-flash.lovable.app/",
+          image: "https://allegra-ink-flash.lovable.app/",
+          sameAs: ["https://instagram.com/tal_allegra_magdalena"],
+          email: "allegra.magdalena.tattoo@gmail.com",
+          knowsAbout: ["Fine line tattoo", "Flash tattoo", "Botanical tattoo"],
+          knowsLanguage: ["fr", "en", "he"],
+        }),
+      },
+    ],
   }),
   component: Index,
 });
