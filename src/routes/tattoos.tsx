@@ -19,6 +19,19 @@ export const Route = createFileRoute("/tattoos")({
       { property: "og:image", content: t5 },
     ],
     links: [{ rel: "canonical", href: "https://allegra-ink-flash.lovable.app/tattoos" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Tatouages — Allegra Magdalena",
+          description: "Galerie de tatouages fine line, botanique, figures et compositions.",
+          url: "https://allegra-ink-flash.lovable.app/tattoos",
+          creator: { "@type": "Person", name: "Allegra Magdalena" },
+        }),
+      },
+    ],
   }),
   component: Tattoos,
 });
