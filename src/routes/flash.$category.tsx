@@ -22,6 +22,19 @@ export const Route = createFileRoute("/flash/$category")({
             { property: "og:image", content: loaderData.cat.cover },
           ],
           links: [{ rel: "canonical", href: `https://allegra-ink-flash.lovable.app/flash/${params.category}` }],
+          scripts: [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "CollectionPage",
+                name: `Flash · ${loaderData.cat.title}`,
+                description: loaderData.cat.desc,
+                url: `https://allegra-ink-flash.lovable.app/flash/${params.category}`,
+                creator: { "@type": "Person", name: "Allegra Magdalena" },
+              }),
+            },
+          ],
         }
       : {},
   notFoundComponent: () => (
@@ -67,7 +80,7 @@ function FlashCategory() {
             <p className="mt-4 max-w-xl font-mono text-sm">{cat.desc}</p>
           </div>
           <div className="lg:col-span-5 brutal-border p-4">
-            <img src={cat.cover} alt={cat.title} className="w-full h-64 object-cover border-b-2 border-ink" width={1024} height={1024} loading="lazy" />
+            <img src={cat.cover} alt={`Planche cover flash ${cat.title.toLowerCase()} — ${cat.count} dessins disponibles`} className="w-full h-64 object-cover border-b-2 border-ink" width={1024} height={1024} loading="lazy" />
             <div className="font-mono text-xs uppercase pt-3 flex justify-between">
               <span>{cat.count} pièces</span>
               <span>Cover sheet</span>
@@ -89,7 +102,7 @@ function FlashCategory() {
               className="brutal-border bg-paper group"
             >
               <div className="aspect-square border-b-2 border-ink overflow-hidden bg-paper relative">
-                <img src={cat.cover} alt={p.title} loading="lazy" width={512} height={512} className="w-full h-full object-cover" style={{ objectPosition: `${(i * 23) % 100}% ${(i * 41) % 100}%` }} />
+                <img src={cat.cover} alt={`Dessin flash ${cat.title.toLowerCase()} ${p.title} — ${p.status.toLowerCase()}`} loading="lazy" width={512} height={512} className="w-full h-full object-cover" style={{ objectPosition: `${(i * 23) % 100}% ${(i * 41) % 100}%` }} />
                 {p.status === "Réservé" && (
                   <div className="absolute inset-0 bg-ink/70 flex items-center justify-center">
                     <span className="font-display uppercase text-2xl text-accent rotate-[-8deg] border-2 border-accent px-3 py-1">Réservé</span>

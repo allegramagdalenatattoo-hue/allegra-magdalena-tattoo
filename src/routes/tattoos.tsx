@@ -19,6 +19,19 @@ export const Route = createFileRoute("/tattoos")({
       { property: "og:image", content: t5 },
     ],
     links: [{ rel: "canonical", href: "https://allegra-ink-flash.lovable.app/tattoos" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Tatouages — Allegra Magdalena",
+          description: "Galerie de tatouages fine line, botanique, figures et compositions.",
+          url: "https://allegra-ink-flash.lovable.app/tattoos",
+          creator: { "@type": "Person", name: "Allegra Magdalena" },
+        }),
+      },
+    ],
   }),
   component: Tattoos,
 });
@@ -57,7 +70,7 @@ function Tattoos() {
               <div className="relative overflow-hidden border-b-2 border-ink aspect-[4/5]">
                 <motion.img
                   src={it.src}
-                  alt={it.title}
+                  alt={`Tatouage fine line ${it.title.toLowerCase()} sur ${it.placement.toLowerCase()} par Allegra Magdalena (${it.year})`}
                   loading="lazy"
                   width={1024}
                   height={1024}

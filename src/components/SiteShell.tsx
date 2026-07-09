@@ -92,8 +92,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 {n.label}
               </Link>
             ))}
-            <a href={IG_URL} target="_blank" rel="noreferrer" className="ml-2 px-3 py-2 border-2 border-ink hover:bg-accent hover:border-accent hover:text-paper transition-colors animate-wobble">
-              <Instagram className="w-4 h-4" />
+            <a href={IG_URL} target="_blank" rel="noreferrer" aria-label="Instagram — @tal_allegra_magdalena" className="ml-2 px-3 py-2 border-2 border-ink hover:bg-accent hover:border-accent hover:text-paper transition-colors animate-wobble">
+              <Instagram className="w-4 h-4" aria-hidden="true" />
             </a>
           </nav>
           <button onClick={() => setOpen(!open)} className="md:hidden border-2 border-ink px-3 py-2 font-mono text-sm uppercase animate-jitter">
@@ -131,7 +131,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         <Marquee variant="accent" reverse />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6 md:p-12 bg-ink text-paper">
           <div>
-            <h3 className="font-display text-4xl uppercase animate-glitch">Allegra<br/>Magdalena</h3>
+            <h2 className="font-display text-4xl uppercase animate-glitch">Allegra<br/>Magdalena</h2>
             <p className="mt-2 font-mono text-sm opacity-80">Tattoo artist · אמנית קעקועים</p>
           </div>
           <div className="font-mono text-sm space-y-2">
