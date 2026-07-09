@@ -15,6 +15,24 @@ export const Route = createFileRoute("/flash/")({
       { property: "og:image", content: CATEGORIES[3].cover },
     ],
     links: [{ rel: "canonical", href: "https://allegra-ink-flash.lovable.app/flash" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Flash — Allegra Magdalena",
+          description: "Catalogue de dessins flash disponibles, classés par catégorie.",
+          url: "https://allegra-ink-flash.lovable.app/flash",
+          hasPart: CATEGORIES.map((c) => ({
+            "@type": "CollectionPage",
+            name: `Flash · ${c.title}`,
+            url: `https://allegra-ink-flash.lovable.app/flash/${c.slug}`,
+            description: c.desc,
+          })),
+        }),
+      },
+    ],
   }),
   component: FlashIndex,
 });
