@@ -70,7 +70,7 @@ function Tattoos() {
               <div className="relative overflow-hidden border-b-2 border-ink aspect-[4/5]">
                 <motion.img
                   src={it.src}
-                  alt={it.title}
+                  alt={`Tatouage fine line ${it.title.toLowerCase()} sur ${it.placement.toLowerCase()} par Allegra Magdalena (${it.year})`}
                   loading="lazy"
                   width={1024}
                   height={1024}
