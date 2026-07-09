@@ -22,6 +22,19 @@ export const Route = createFileRoute("/flash/$category")({
             { property: "og:image", content: loaderData.cat.cover },
           ],
           links: [{ rel: "canonical", href: `https://allegra-ink-flash.lovable.app/flash/${params.category}` }],
+          scripts: [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "CollectionPage",
+                name: `Flash · ${loaderData.cat.title}`,
+                description: loaderData.cat.desc,
+                url: `https://allegra-ink-flash.lovable.app/flash/${params.category}`,
+                creator: { "@type": "Person", name: "Allegra Magdalena" },
+              }),
+            },
+          ],
         }
       : {},
   notFoundComponent: () => (
