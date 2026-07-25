@@ -84,13 +84,8 @@ export const Route = createFileRoute("/flash/$category")({
 
 function FlashCategory() {
   const { cat } = Route.useLoaderData();
-  // Mock flash pieces using cover variants
-  const pieces = Array.from({ length: cat.count }, (_, i) => ({
-    id: i + 1,
-    title: `${cat.title} · ${String(i + 1).padStart(2, "0")}`,
-    price: `${180 + ((i * 37) % 320)} €`,
-    status: i % 5 === 0 ? "Réservé" : "Disponible",
-  }));
+  const pieces = buildPieces(cat);
+
 
   return (
     <SiteShell>
