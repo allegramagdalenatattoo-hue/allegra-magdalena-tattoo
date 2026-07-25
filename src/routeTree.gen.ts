@@ -15,6 +15,7 @@ import { Route as ShopRouteImport } from './routes/shop'
 import { Route as FlashRouteImport } from './routes/flash'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FlashIndexRouteImport } from './routes/flash.index'
+import { Route as GuideFineLineRouteImport } from './routes/guide.fine-line'
 import { Route as FlashCategoryRouteImport } from './routes/flash.$category'
 
 const TattoosRoute = TattoosRouteImport.update({
@@ -47,6 +48,11 @@ const FlashIndexRoute = FlashIndexRouteImport.update({
   path: '/',
   getParentRoute: () => FlashRoute,
 } as any)
+const GuideFineLineRoute = GuideFineLineRouteImport.update({
+  id: '/guide/fine-line',
+  path: '/guide/fine-line',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FlashCategoryRoute = FlashCategoryRouteImport.update({
   id: '/$category',
   path: '/$category',
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tattoos': typeof TattoosRoute
   '/flash/$category': typeof FlashCategoryRoute
+  '/guide/fine-line': typeof GuideFineLineRoute
   '/flash/': typeof FlashIndexRoute
 }
 export interface FileRoutesByTo {
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tattoos': typeof TattoosRoute
   '/flash/$category': typeof FlashCategoryRoute
+  '/guide/fine-line': typeof GuideFineLineRoute
   '/flash': typeof FlashIndexRoute
 }
 export interface FileRoutesById {
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tattoos': typeof TattoosRoute
   '/flash/$category': typeof FlashCategoryRoute
+  '/guide/fine-line': typeof GuideFineLineRoute
   '/flash/': typeof FlashIndexRoute
 }
 export interface FileRouteTypes {
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tattoos'
     | '/flash/$category'
+    | '/guide/fine-line'
     | '/flash/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tattoos'
     | '/flash/$category'
+    | '/guide/fine-line'
     | '/flash'
   id:
     | '__root__'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/tattoos'
     | '/flash/$category'
+    | '/guide/fine-line'
     | '/flash/'
   fileRoutesById: FileRoutesById
 }
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   ShopRoute: typeof ShopRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TattoosRoute: typeof TattoosRoute
+  GuideFineLineRoute: typeof GuideFineLineRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -161,6 +174,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FlashIndexRouteImport
       parentRoute: typeof FlashRoute
     }
+    '/guide/fine-line': {
+      id: '/guide/fine-line'
+      path: '/guide/fine-line'
+      fullPath: '/guide/fine-line'
+      preLoaderRoute: typeof GuideFineLineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/flash/$category': {
       id: '/flash/$category'
       path: '/$category'
@@ -189,6 +209,7 @@ const rootRouteChildren: RootRouteChildren = {
   ShopRoute: ShopRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TattoosRoute: TattoosRoute,
+  GuideFineLineRoute: GuideFineLineRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
