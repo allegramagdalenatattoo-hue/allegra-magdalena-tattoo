@@ -15,3 +15,4 @@ Allegra Magdalena est une tatoueuse active depuis 2019. Son travail explore les 
 - [/flash/composition](/flash/composition): Flash compositions et figures.
 - [/flash/animaux](/flash/animaux): Flash sur le thème des animaux.
 - [/shop](/shop): Vitrine — dessins originaux, prints en édition limitée et objets. DM ou email pour commander.
+- [/guide/fine-line](/guide/fine-line): Guide sur le vieillissement, la durabilité et l'entretien des tatouages fine line.
