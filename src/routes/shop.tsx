@@ -5,6 +5,15 @@ import { SiteShell, EMAIL, IG_URL } from "@/components/SiteShell";
 import { CATEGORIES } from "@/lib/flash-data";
 import hero from "@/assets/hero.jpg";
 
+const ITEMS = [
+  { title: "Flash sheet — Botanique", cat: "Dessin", price: "120 €", priceNum: "120", img: CATEGORIES[1].cover, edition: "Original encre / papier" },
+  { title: "Composition · figures", cat: "Dessin", price: "240 €", priceNum: "240", img: CATEGORIES[3].cover, edition: "Original encre / papier" },
+  { title: "Animaux — print A3", cat: "Print", price: "45 €", priceNum: "45", img: CATEGORIES[4].cover, edition: "Édition de 25" },
+  { title: "Nudité — étude", cat: "Dessin", price: "180 €", priceNum: "180", img: CATEGORIES[0].cover, edition: "Original" },
+  { title: "Corps — print A4", cat: "Print", price: "30 €", priceNum: "30", img: CATEGORIES[2].cover, edition: "Édition ouverte" },
+  { title: "Tirage photo — atelier", cat: "Photo", price: "60 €", priceNum: "60", img: hero, edition: "Édition de 10" },
+];
+
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
@@ -25,6 +34,21 @@ export const Route = createFileRoute("/shop")({
           name: "Shop — Allegra Magdalena",
           description: "Dessins originaux, prints en édition limitée et objets à commander en DM ou par email.",
           url: "https://allegra-ink-flash.lovable.app/shop",
+          hasPart: ITEMS.map((it) => ({
+            "@type": "Product",
+            name: it.title,
+            category: it.cat,
+            description: it.edition,
+            image: `https://allegra-ink-flash.lovable.app${it.img}`,
+            brand: { "@type": "Person", name: "Allegra Magdalena" },
+            offers: {
+              "@type": "Offer",
+              price: it.priceNum,
+              priceCurrency: "EUR",
+              availability: "https://schema.org/InStock",
+              url: "https://allegra-ink-flash.lovable.app/shop",
+            },
+          })),
         }),
       },
     ],
@@ -32,14 +56,6 @@ export const Route = createFileRoute("/shop")({
   component: Shop,
 });
 
-const ITEMS = [
-  { title: "Flash sheet — Botanique", cat: "Dessin", price: "120 €", img: CATEGORIES[1].cover, edition: "Original encre / papier" },
-  { title: "Composition · figures", cat: "Dessin", price: "240 €", img: CATEGORIES[3].cover, edition: "Original encre / papier" },
-  { title: "Animaux — print A3", cat: "Print", price: "45 €", img: CATEGORIES[4].cover, edition: "Édition de 25" },
-  { title: "Nudité — étude", cat: "Dessin", price: "180 €", img: CATEGORIES[0].cover, edition: "Original" },
-  { title: "Corps — print A4", cat: "Print", price: "30 €", img: CATEGORIES[2].cover, edition: "Édition ouverte" },
-  { title: "Tirage photo — atelier", cat: "Photo", price: "60 €", img: hero, edition: "Édition de 10" },
-];
 
 function Shop() {
   return (
