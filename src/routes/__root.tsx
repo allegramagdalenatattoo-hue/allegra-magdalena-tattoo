@@ -70,6 +70,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: "Allegra Magdalena · tatouages fine line, fat line,  flash et compositions. Paris, Tel Aviv & ailleurs." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/c5c7688b-14eb-49b0-b53a-2780504dfeb3" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/c5c7688b-14eb-49b0-b53a-2780504dfeb3" },
+      { name: "google-site-verification", content: "Nbvfhguk-OcHvokOviAKuyzR4utp6QECUB9hYB4TAdU" },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
