@@ -4,6 +4,16 @@ import { ArrowLeft, Mail } from "lucide-react";
 import { SiteShell, EMAIL } from "@/components/SiteShell";
 import { CATEGORIES, type CategorySlug } from "@/lib/flash-data";
 
+function buildPieces(cat: (typeof CATEGORIES)[number]) {
+  return Array.from({ length: cat.count }, (_, i) => ({
+    id: i + 1,
+    title: `${cat.title} · ${String(i + 1).padStart(2, "0")}`,
+    price: `${180 + ((i * 37) % 320)} €`,
+    priceNum: 180 + ((i * 37) % 320),
+    status: i % 5 === 0 ? "Réservé" : "Disponible",
+  }));
+}
+
 export const Route = createFileRoute("/flash/$category")({
   loader: ({ params }) => {
     const cat = CATEGORIES.find((c) => c.slug === params.category);
@@ -32,6 +42,23 @@ export const Route = createFileRoute("/flash/$category")({
                 description: loaderData.cat.desc,
                 url: `https://allegra-ink-flash.lovable.app/flash/${params.category}`,
                 creator: { "@type": "Person", name: "Allegra Magdalena" },
+                hasPart: buildPieces(loaderData.cat).map((p) => ({
+                  "@type": "Product",
+                  name: p.title,
+                  category: `Flash tattoo · ${loaderData.cat.title}`,
+                  image: `https://allegra-ink-flash.lovable.app${loaderData.cat.cover}`,
+                  brand: { "@type": "Person", name: "Allegra Magdalena" },
+                  offers: {
+                    "@type": "Offer",
+                    price: String(p.priceNum),
+                    priceCurrency: "EUR",
+                    availability:
+                      p.status === "Réservé"
+                        ? "https://schema.org/SoldOut"
+                        : "https://schema.org/InStock",
+                    url: `https://allegra-ink-flash.lovable.app/flash/${params.category}`,
+                  },
+                })),
               }),
             },
           ],
