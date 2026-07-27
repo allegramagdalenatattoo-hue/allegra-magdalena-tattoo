@@ -12,10 +12,10 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Tatouages fine line, flash et compositions. FR · EN · עברית." },
       { property: "og:title", content: "Allegra Magdalena — Tattoo Artist" },
       { property: "og:description", content: "Tatouages fine line, flash et compositions." },
-      { property: "og:url", content: "https://allegra-ink-flash.lovable.app/" },
+      { property: "og:url", content: "https://allega-magdalena-tattoo.lovable.app/" },
       { property: "og:image", content: hero },
     ],
-    links: [{ rel: "canonical", href: "https://allegra-ink-flash.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://allega-magdalena-tattoo.lovable.app/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -25,8 +25,8 @@ export const Route = createFileRoute("/")({
           name: "Allegra Magdalena",
           alternateName: "אלגרה מגדלנה",
           jobTitle: "Tattoo Artist",
-          url: "https://allegra-ink-flash.lovable.app/",
-          image: "https://allegra-ink-flash.lovable.app/",
+          url: "https://allega-magdalena-tattoo.lovable.app/",
+          image: "https://allega-magdalena-tattoo.lovable.app/",
           sameAs: ["https://instagram.com/tal_allegra_magdalena"],
           email: "allegra.magdalena.tattoo@gmail.com",
           knowsAbout: ["Fine line tattoo", "Flash tattoo", "Botanical tattoo"],

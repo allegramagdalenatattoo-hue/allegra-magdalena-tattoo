@@ -28,10 +28,10 @@ export const Route = createFileRoute("/flash/$category")({
             { name: "description", content: loaderData.cat.desc },
             { property: "og:title", content: `Flash · ${loaderData.cat.title}` },
             { property: "og:description", content: loaderData.cat.desc },
-            { property: "og:url", content: `https://allegra-ink-flash.lovable.app/flash/${params.category}` },
+            { property: "og:url", content: `https://allega-magdalena-tattoo.lovable.app/flash/${params.category}` },
             { property: "og:image", content: loaderData.cat.cover },
           ],
-          links: [{ rel: "canonical", href: `https://allegra-ink-flash.lovable.app/flash/${params.category}` }],
+          links: [{ rel: "canonical", href: `https://allega-magdalena-tattoo.lovable.app/flash/${params.category}` }],
           scripts: [
             {
               type: "application/ld+json",
@@ -40,13 +40,13 @@ export const Route = createFileRoute("/flash/$category")({
                 "@type": "CollectionPage",
                 name: `Flash · ${loaderData.cat.title}`,
                 description: loaderData.cat.desc,
-                url: `https://allegra-ink-flash.lovable.app/flash/${params.category}`,
+                url: `https://allega-magdalena-tattoo.lovable.app/flash/${params.category}`,
                 creator: { "@type": "Person", name: "Allegra Magdalena" },
                 hasPart: buildPieces(loaderData.cat).map((p) => ({
                   "@type": "Product",
                   name: p.title,
                   category: `Flash tattoo · ${loaderData.cat.title}`,
-                  image: `https://allegra-ink-flash.lovable.app${loaderData.cat.cover}`,
+                  image: `https://allega-magdalena-tattoo.lovable.app${loaderData.cat.cover}`,
                   brand: { "@type": "Person", name: "Allegra Magdalena" },
                   offers: {
                     "@type": "Offer",
@@ -56,7 +56,7 @@ export const Route = createFileRoute("/flash/$category")({
                       p.status === "Réservé"
                         ? "https://schema.org/SoldOut"
                         : "https://schema.org/InStock",
-                    url: `https://allegra-ink-flash.lovable.app/flash/${params.category}`,
+                    url: `https://allega-magdalena-tattoo.lovable.app/flash/${params.category}`,
                   },
                 })),
               }),

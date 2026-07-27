@@ -11,10 +11,10 @@ export const Route = createFileRoute("/flash/")({
       { name: "description", content: "Propositions de dessins flash disponibles : nudité, botanique, corps, composition, animaux." },
       { property: "og:title", content: "Flash — Allegra Magdalena" },
       { property: "og:description", content: "Dessins flash disponibles à tatouer." },
-      { property: "og:url", content: "https://allegra-ink-flash.lovable.app/flash" },
+      { property: "og:url", content: "https://allega-magdalena-tattoo.lovable.app/flash" },
       { property: "og:image", content: CATEGORIES[3].cover },
     ],
-    links: [{ rel: "canonical", href: "https://allegra-ink-flash.lovable.app/flash" }],
+    links: [{ rel: "canonical", href: "https://allega-magdalena-tattoo.lovable.app/flash" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -23,11 +23,11 @@ export const Route = createFileRoute("/flash/")({
           "@type": "CollectionPage",
           name: "Flash — Allegra Magdalena",
           description: "Catalogue de dessins flash disponibles, classés par catégorie.",
-          url: "https://allegra-ink-flash.lovable.app/flash",
+          url: "https://allega-magdalena-tattoo.lovable.app/flash",
           hasPart: CATEGORIES.map((c) => ({
             "@type": "CollectionPage",
             name: `Flash · ${c.title}`,
-            url: `https://allegra-ink-flash.lovable.app/flash/${c.slug}`,
+            url: `https://allega-magdalena-tattoo.lovable.app/flash/${c.slug}`,
             description: c.desc,
           })),
         }),

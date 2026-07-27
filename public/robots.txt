@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://allegra-ink-flash.lovable.app/sitemap.xml
+Sitemap: https://allega-magdalena-tattoo.lovable.app/sitemap.xml
