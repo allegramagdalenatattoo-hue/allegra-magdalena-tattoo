@@ -244,7 +244,27 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* QUESTIONNAIRE TALLY */}
+      <section id="questionnaire" className="p-6 md:p-12 lg:p-16 border-t-4 border-ink relative">
+        <p className="font-mono text-xs uppercase tracking-widest mb-4 bg-accent text-paper inline-block px-2 py-1">⟶ Formulaire de projet</p>
+        <h2 className="font-display uppercase text-6xl md:text-8xl leading-none mb-8">
+          Racon<span className="text-accent">te</span><br />ton projet
+        </h2>
+        <div className="brutal-border brutal-shadow bg-paper p-2 md:p-4 rotate-[0.6deg] hover:rotate-0 transition-transform">
+          <iframe
+            src="https://tally.so/embed/2EgQqL?alignLeft=1&hideTitle=1&transparentBackground=1"
+            title="Questionnaire de réservation — Allegra Magdalena Tattoo"
+            loading="lazy"
+            className="w-full h-[900px] md:h-[820px] border-0"
+          />
+        </div>
+        <noscript>
+          <a href="https://tally.so/r/2EgQqL" className="font-mono underline">Ouvrir le questionnaire</a>
+        </noscript>
+      </section>
     </SiteShell>
+
   );
 }
 
