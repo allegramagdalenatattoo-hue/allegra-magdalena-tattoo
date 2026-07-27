@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { CATEGORIES } from "@/lib/flash-data";
 
-const BASE_URL = "https://allegra-ink-flash.lovable.app";
+const BASE_URL = "https://allega-magdalena-tattoo.lovable.app";
 
 interface SitemapEntry {
   path: string;

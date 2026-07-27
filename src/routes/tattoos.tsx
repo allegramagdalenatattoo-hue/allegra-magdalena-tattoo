@@ -15,10 +15,10 @@ export const Route = createFileRoute("/tattoos")({
       { name: "description", content: "Galerie de mes tatouages : fine line, botanique, figures et compositions." },
       { property: "og:title", content: "Tatouages — Allegra Magdalena" },
       { property: "og:description", content: "Galerie de mes tatouages réalisés." },
-      { property: "og:url", content: "https://allegra-ink-flash.lovable.app/tattoos" },
+      { property: "og:url", content: "https://allega-magdalena-tattoo.lovable.app/tattoos" },
       { property: "og:image", content: t5 },
     ],
-    links: [{ rel: "canonical", href: "https://allegra-ink-flash.lovable.app/tattoos" }],
+    links: [{ rel: "canonical", href: "https://allega-magdalena-tattoo.lovable.app/tattoos" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/tattoos")({
           "@type": "CollectionPage",
           name: "Tatouages — Allegra Magdalena",
           description: "Galerie de tatouages fine line, botanique, figures et compositions.",
-          url: "https://allegra-ink-flash.lovable.app/tattoos",
+          url: "https://allega-magdalena-tattoo.lovable.app/tattoos",
           creator: { "@type": "Person", name: "Allegra Magdalena" },
         }),
       },

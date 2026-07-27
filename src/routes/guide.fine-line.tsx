@@ -7,7 +7,7 @@ import cover from "@/assets/flash-botanique.jpg";
 const TITLE = "Fine line : vieillissement, durabilité & entretien — Allegra Magdalena";
 const DESCRIPTION =
   "Guide complet sur le vieillissement des tatouages fine line : durabilité, pros et cons, placements à éviter, aftercare et retouches. Par Allegra Magdalena.";
-const URL = "https://allegra-ink-flash.lovable.app/guide/fine-line";
+const URL = "https://allega-magdalena-tattoo.lovable.app/guide/fine-line";
 
 export const Route = createFileRoute("/guide/fine-line")({
   head: () => ({
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/guide/fine-line")({
           inLanguage: "fr",
           author: { "@type": "Person", name: "Allegra Magdalena" },
           publisher: { "@type": "Person", name: "Allegra Magdalena" },
-          image: `https://allegra-ink-flash.lovable.app${cover}`,
+          image: `https://allega-magdalena-tattoo.lovable.app${cover}`,
           mainEntityOfPage: URL,
         }),
       },
