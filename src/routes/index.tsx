@@ -226,7 +226,12 @@ function Index() {
               </div>
               <div>
                 <dt className="uppercase text-xs opacity-80">Réservations</dt>
-                <dd className="mt-1">DM Instagram ou email. Réponse sous 48h.</dd>
+                <dd className="mt-1">
+                  Remplis le{" "}
+                  <a href="#questionnaire" className="underline decoration-2 underline-offset-4 hover:text-accent">questionnaire</a>
+                  , DM Instagram ou email. Réponse sous 48h.
+                </dd>
+
               </div>
               <div>
                 <dt className="uppercase text-xs opacity-80">Languages</dt>
