@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { Instagram, Mail } from "lucide-react";
 import { SiteShell, EMAIL, IG_URL } from "@/components/SiteShell";
 import { CATEGORIES } from "@/lib/flash-data";
+import { photosQueryOptions } from "@/lib/photos";
 import hero from "@/assets/hero.jpg";
 
 const ITEMS = [
@@ -53,11 +55,22 @@ export const Route = createFileRoute("/shop")({
       },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(photosQueryOptions(["shop"])),
   component: Shop,
 });
 
 
 function Shop() {
+  const { data: photos } = useSuspenseQuery(photosQueryOptions(["shop"]));
+  const items = photos.length
+    ? photos.map((p) => ({
+        title: p.title,
+        cat: p.status === "Disponible" ? "Shop" : p.status,
+        price: p.price ?? "",
+        img: p.image_url,
+        edition: p.subtitle,
+      }))
+    : ITEMS;
   return (
     <SiteShell>
       <section className="p-6 md:p-12 lg:p-16 border-b-2 border-ink">
@@ -81,7 +94,7 @@ function Shop() {
 
       <section className="p-4 md:p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {ITEMS.map((it, i) => (
+          {items.map((it, i) => (
             <motion.article
               key={i}
               initial={{ opacity: 0, y: 30 }}
