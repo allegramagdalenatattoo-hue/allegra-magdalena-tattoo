@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { Instagram, Mail, ArrowRight } from "lucide-react";
 import { SiteShell, IG_URL, EMAIL } from "@/components/SiteShell";
 import { CAT_GIFS } from "@/components/CatGifs";
+import { photosQueryOptions } from "@/lib/photos";
 import hero from "@/assets/hero.jpg";
 
 export const Route = createFileRoute("/")({
@@ -35,10 +37,13 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(photosQueryOptions(["site:hero"])),
   component: Index,
 });
 
 function Index() {
+  const { data: heroPhotos } = useSuspenseQuery(photosQueryOptions(["site:hero"]));
+  const heroSrc = heroPhotos.find((p) => p.section === "site:hero")?.image_url ?? hero;
   return (
     <SiteShell>
       {/* HERO */}
@@ -109,7 +114,7 @@ function Index() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-5 relative border-t-2 lg:border-t-0 lg:border-l-2 border-ink min-h-[400px] lg:min-h-[600px] overflow-hidden"
           >
-            <img src={hero} alt="Allegra Magdalena tatouant" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1024} />
+            <img src={heroSrc} alt="Allegra Magdalena tatouant" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1024} />
             <div className="absolute inset-0 scanlines pointer-events-none mix-blend-multiply opacity-60" />
             <motion.div
               animate={{ rotate: [0, 360] }}

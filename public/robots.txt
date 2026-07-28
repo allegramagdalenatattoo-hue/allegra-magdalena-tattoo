@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /auth
 
 Sitemap: https://allega-magdalena-tattoo.lovable.app/sitemap.xml

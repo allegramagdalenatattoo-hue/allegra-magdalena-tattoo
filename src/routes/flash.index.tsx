@@ -1,8 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { SiteShell } from "@/components/SiteShell";
 import { CATEGORIES } from "@/lib/flash-data";
+import { photosQueryOptions, coverSection, flashSection } from "@/lib/photos";
+
+const SECTIONS = CATEGORIES.flatMap((c) => [coverSection(c.slug), flashSection(c.slug)]);
 
 export const Route = createFileRoute("/flash/")({
   head: () => ({
@@ -34,10 +38,12 @@ export const Route = createFileRoute("/flash/")({
       },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(photosQueryOptions(SECTIONS)),
   component: FlashIndex,
 });
 
 function FlashIndex() {
+  const { data: photos } = useSuspenseQuery(photosQueryOptions(SECTIONS));
   return (
     <SiteShell>
       <section className="p-6 md:p-12 lg:p-16 border-b-2 border-ink">
@@ -68,7 +74,7 @@ function FlashIndex() {
               >
                 <div className="relative overflow-hidden border-b-2 border-ink aspect-[4/3] bg-paper">
                   <motion.img
-                    src={c.cover}
+                    src={photos.find((p) => p.section === coverSection(c.slug))?.image_url ?? c.cover}
                     alt={`Flash tatouage ${c.title.toLowerCase()} — planche cover ${c.count} pièces`}
                     loading="lazy"
                     width={1024}
@@ -89,7 +95,7 @@ function FlashIndex() {
                   <ArrowUpRight className="w-8 h-8 shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
                 <div className="font-mono text-xs uppercase border-t-2 border-current px-4 py-2 flex justify-between">
-                  <span>{c.count} pièces</span>
+                  <span>{photos.filter((p) => p.section === flashSection(c.slug)).length || c.count} pièces</span>
                   <span>Voir →</span>
                 </div>
               </Link>

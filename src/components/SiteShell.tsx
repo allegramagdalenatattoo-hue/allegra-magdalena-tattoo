@@ -144,6 +144,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           </div>
           <div className="font-mono text-xs uppercase opacity-70">
             © {new Date().getFullYear()} — Tous droits réservés.<br />Site brutaliste, fait à la main, sans pitié.
+            <br /><Link to="/admin" className="underline hover:text-[var(--accent-2)]">Admin</Link>
           </div>
         </div>
       </footer>
