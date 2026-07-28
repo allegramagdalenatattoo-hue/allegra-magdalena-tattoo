@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { supabase } from "@/integrations/supabase/client";
 import { supabase } from "@/integrations/supabase/client";
 import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 
 function NotFoundComponent() {
   return (
