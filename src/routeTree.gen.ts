@@ -13,10 +13,14 @@ import { Route as TattoosRouteImport } from './routes/tattoos'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as FlashRouteImport } from './routes/flash'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FlashIndexRouteImport } from './routes/flash.index'
 import { Route as GuideFineLineRouteImport } from './routes/guide.fine-line'
 import { Route as FlashCategoryRouteImport } from './routes/flash.$category'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as ApiPublicPhotosSplatRouteImport } from './routes/api/public/photos/$'
 
 const TattoosRoute = TattoosRouteImport.update({
   id: '/tattoos',
@@ -36,6 +40,15 @@ const ShopRoute = ShopRouteImport.update({
 const FlashRoute = FlashRouteImport.update({
   id: '/flash',
   path: '/flash',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -58,76 +71,109 @@ const FlashCategoryRoute = FlashCategoryRouteImport.update({
   path: '/$category',
   getParentRoute: () => FlashRoute,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ApiPublicPhotosSplatRoute = ApiPublicPhotosSplatRouteImport.update({
+  id: '/api/public/photos/$',
+  path: '/api/public/photos/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/flash': typeof FlashRouteWithChildren
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tattoos': typeof TattoosRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/flash/$category': typeof FlashCategoryRoute
   '/guide/fine-line': typeof GuideFineLineRoute
   '/flash/': typeof FlashIndexRoute
+  '/api/public/photos/$': typeof ApiPublicPhotosSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tattoos': typeof TattoosRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/flash/$category': typeof FlashCategoryRoute
   '/guide/fine-line': typeof GuideFineLineRoute
   '/flash': typeof FlashIndexRoute
+  '/api/public/photos/$': typeof ApiPublicPhotosSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/flash': typeof FlashRouteWithChildren
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/tattoos': typeof TattoosRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/flash/$category': typeof FlashCategoryRoute
   '/guide/fine-line': typeof GuideFineLineRoute
   '/flash/': typeof FlashIndexRoute
+  '/api/public/photos/$': typeof ApiPublicPhotosSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/flash'
     | '/shop'
     | '/sitemap.xml'
     | '/tattoos'
+    | '/admin'
     | '/flash/$category'
     | '/guide/fine-line'
     | '/flash/'
+    | '/api/public/photos/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/shop'
     | '/sitemap.xml'
     | '/tattoos'
+    | '/admin'
     | '/flash/$category'
     | '/guide/fine-line'
     | '/flash'
+    | '/api/public/photos/$'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/auth'
     | '/flash'
     | '/shop'
     | '/sitemap.xml'
     | '/tattoos'
+    | '/_authenticated/admin'
     | '/flash/$category'
     | '/guide/fine-line'
     | '/flash/'
+    | '/api/public/photos/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   FlashRoute: typeof FlashRouteWithChildren
   ShopRoute: typeof ShopRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TattoosRoute: typeof TattoosRoute
   GuideFineLineRoute: typeof GuideFineLineRoute
+  ApiPublicPhotosSplatRoute: typeof ApiPublicPhotosSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -160,6 +206,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FlashRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -188,8 +248,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FlashCategoryRouteImport
       parentRoute: typeof FlashRoute
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/public/photos/$': {
+      id: '/api/public/photos/$'
+      path: '/api/public/photos/$'
+      fullPath: '/api/public/photos/$'
+      preLoaderRoute: typeof ApiPublicPhotosSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface FlashRouteChildren {
   FlashCategoryRoute: typeof FlashCategoryRoute
@@ -205,22 +290,15 @@ const FlashRouteWithChildren = FlashRoute._addFileChildren(FlashRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   FlashRoute: FlashRouteWithChildren,
   ShopRoute: ShopRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TattoosRoute: TattoosRoute,
   GuideFineLineRoute: GuideFineLineRoute,
+  ApiPublicPhotosSplatRoute: ApiPublicPhotosSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
