@@ -1,25 +1,32 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { ArrowLeft, Mail } from "lucide-react";
 import { SiteShell, EMAIL } from "@/components/SiteShell";
-import { CATEGORIES, type CategorySlug } from "@/lib/flash-data";
+import { CATEGORIES } from "@/lib/flash-data";
+import { photosQueryOptions, coverSection, flashSection } from "@/lib/photos";
 
 function buildPieces(cat: (typeof CATEGORIES)[number]) {
   return Array.from({ length: cat.count }, (_, i) => ({
-    id: i + 1,
+    id: String(i + 1),
     title: `${cat.title} · ${String(i + 1).padStart(2, "0")}`,
     price: `${180 + ((i * 37) % 320)} €`,
     priceNum: 180 + ((i * 37) % 320),
     status: i % 5 === 0 ? "Réservé" : "Disponible",
+    image: null as string | null,
   }));
 }
 
+const sectionsFor = (slug: string) => [coverSection(slug), flashSection(slug)];
+
 export const Route = createFileRoute("/flash/$category")({
-  loader: ({ params }) => {
+  loader: async ({ params, context }) => {
     const cat = CATEGORIES.find((c) => c.slug === params.category);
     if (!cat) throw notFound();
+    await context.queryClient.ensureQueryData(photosQueryOptions(sectionsFor(cat.slug)));
     return { cat };
   },
+
   head: ({ loaderData, params }) =>
     loaderData
       ? {
@@ -84,7 +91,21 @@ export const Route = createFileRoute("/flash/$category")({
 
 function FlashCategory() {
   const { cat } = Route.useLoaderData();
-  const pieces = buildPieces(cat);
+  const { data: photos } = useSuspenseQuery(photosQueryOptions(sectionsFor(cat.slug)));
+  const dbPieces = photos.filter((p) => p.section === flashSection(cat.slug));
+  const cover = photos.find((p) => p.section === coverSection(cat.slug))?.image_url ?? cat.cover;
+  const pieces = dbPieces.length
+    ? dbPieces.map((p) => ({
+        id: p.id,
+        title: p.title || cat.title,
+        price: p.price ?? "",
+        status: p.status,
+        image: p.image_url as string | null,
+      }))
+    : buildPieces(cat);
+  const count = pieces.length;
+
+
 
 
   return (
@@ -102,11 +123,12 @@ function FlashCategory() {
             <p className="mt-4 max-w-xl font-mono text-sm">{cat.desc}</p>
           </div>
           <div className="lg:col-span-5 brutal-border p-4">
-            <img src={cat.cover} alt={`Planche cover flash ${cat.title.toLowerCase()} — ${cat.count} dessins disponibles`} className="w-full h-64 object-cover border-b-2 border-ink" width={1024} height={1024} loading="lazy" />
+            <img src={cover} alt={`Planche cover flash ${cat.title.toLowerCase()} — ${count} dessins disponibles`} className="w-full h-64 object-cover border-b-2 border-ink" width={1024} height={1024} loading="lazy" />
             <div className="font-mono text-xs uppercase pt-3 flex justify-between">
-              <span>{cat.count} pièces</span>
+              <span>{count} pièces</span>
               <span>Cover sheet</span>
             </div>
+
           </div>
         </div>
       </section>
@@ -124,7 +146,7 @@ function FlashCategory() {
               className="brutal-border bg-paper group"
             >
               <div className="aspect-square border-b-2 border-ink overflow-hidden bg-paper relative">
-                <img src={cat.cover} alt={`Dessin flash ${cat.title.toLowerCase()} ${p.title} — ${p.status.toLowerCase()}`} loading="lazy" width={512} height={512} className="w-full h-full object-cover" style={{ objectPosition: `${(i * 23) % 100}% ${(i * 41) % 100}%` }} />
+                <img src={p.image ?? cover} alt={`Dessin flash ${cat.title.toLowerCase()} ${p.title} — ${p.status.toLowerCase()}`} loading="lazy" width={512} height={512} className="w-full h-full object-cover" style={p.image ? undefined : { objectPosition: `${(i * 23) % 100}% ${(i * 41) % 100}%` }} />
                 {p.status === "Réservé" && (
                   <div className="absolute inset-0 bg-ink/70 flex items-center justify-center">
                     <span className="font-display uppercase text-2xl text-accent rotate-[-8deg] border-2 border-accent px-3 py-1">Réservé</span>
