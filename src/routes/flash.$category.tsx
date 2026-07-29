@@ -146,7 +146,7 @@ function FlashCategory() {
               className="brutal-border bg-paper group"
             >
               <div className="aspect-square border-b-2 border-ink overflow-hidden bg-paper relative">
-                <img src={cat.cover} alt={`Dessin flash ${cat.title.toLowerCase()} ${p.title} — ${p.status.toLowerCase()}`} loading="lazy" width={512} height={512} className="w-full h-full object-cover" style={{ objectPosition: `${(i * 23) % 100}% ${(i * 41) % 100}%` }} />
+                <img src={p.image ?? cover} alt={`Dessin flash ${cat.title.toLowerCase()} ${p.title} — ${p.status.toLowerCase()}`} loading="lazy" width={512} height={512} className="w-full h-full object-cover" style={p.image ? undefined : { objectPosition: `${(i * 23) % 100}% ${(i * 41) % 100}%` }} />
                 {p.status === "Réservé" && (
                   <div className="absolute inset-0 bg-ink/70 flex items-center justify-center">
                     <span className="font-display uppercase text-2xl text-accent rotate-[-8deg] border-2 border-accent px-3 py-1">Réservé</span>
