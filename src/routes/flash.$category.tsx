@@ -91,7 +91,21 @@ export const Route = createFileRoute("/flash/$category")({
 
 function FlashCategory() {
   const { cat } = Route.useLoaderData();
-  const pieces = buildPieces(cat);
+  const { data: photos } = useSuspenseQuery(photosQueryOptions(sectionsFor(cat.slug)));
+  const dbPieces = photos.filter((p) => p.section === flashSection(cat.slug));
+  const cover = photos.find((p) => p.section === coverSection(cat.slug))?.image_url ?? cat.cover;
+  const pieces = dbPieces.length
+    ? dbPieces.map((p) => ({
+        id: p.id,
+        title: p.title || cat.title,
+        price: p.price ?? "",
+        status: p.status,
+        image: p.image_url as string | null,
+      }))
+    : buildPieces(cat);
+  const count = pieces.length;
+
+
 
 
   return (
