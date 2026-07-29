@@ -1,25 +1,32 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { ArrowLeft, Mail } from "lucide-react";
 import { SiteShell, EMAIL } from "@/components/SiteShell";
-import { CATEGORIES, type CategorySlug } from "@/lib/flash-data";
+import { CATEGORIES } from "@/lib/flash-data";
+import { photosQueryOptions, coverSection, flashSection } from "@/lib/photos";
 
 function buildPieces(cat: (typeof CATEGORIES)[number]) {
   return Array.from({ length: cat.count }, (_, i) => ({
-    id: i + 1,
+    id: String(i + 1),
     title: `${cat.title} · ${String(i + 1).padStart(2, "0")}`,
     price: `${180 + ((i * 37) % 320)} €`,
     priceNum: 180 + ((i * 37) % 320),
     status: i % 5 === 0 ? "Réservé" : "Disponible",
+    image: null as string | null,
   }));
 }
 
+const sectionsFor = (slug: string) => [coverSection(slug), flashSection(slug)];
+
 export const Route = createFileRoute("/flash/$category")({
-  loader: ({ params }) => {
+  loader: async ({ params, context }) => {
     const cat = CATEGORIES.find((c) => c.slug === params.category);
     if (!cat) throw notFound();
+    await context.queryClient.ensureQueryData(photosQueryOptions(sectionsFor(cat.slug)));
     return { cat };
   },
+
   head: ({ loaderData, params }) =>
     loaderData
       ? {
