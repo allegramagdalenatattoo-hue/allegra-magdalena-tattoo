@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
-import { Instagram, Mail, ArrowRight } from "lucide-react";
+import { Instagram, Mail, ArrowRight, CalendarDays } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { SiteShell, IG_URL, EMAIL } from "@/components/SiteShell";
 import { CAT_GIFS } from "@/components/CatGifs";
 import { photosQueryOptions } from "@/lib/photos";
@@ -15,7 +16,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Allegra Magdalena — Tattoo Artist" },
       { property: "og:description", content: "Tatouages fine line, flash et compositions." },
       { property: "og:url", content: "https://allega-magdalena-tattoo.lovable.app/" },
-      { property: "og:image", content: hero },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://allega-magdalena-tattoo.lovable.app/" }],
     scripts: [
@@ -103,9 +105,11 @@ function Index() {
               <Link to="/flash" className="group inline-flex items-center gap-3 border-2 border-ink bg-ink text-paper px-6 py-4 font-mono uppercase hover:bg-accent hover:border-accent transition brutal-shadow-lime">
                 Voir les flash <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
               </Link>
-              <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-3 border-2 border-ink px-6 py-4 font-mono uppercase hover:bg-ink hover:text-paper brutal-shadow-pink">
-                <Mail className="w-4 h-4" /> Réserver
-              </a>
+              <Button asChild variant="outline" className="h-auto rounded-none whitespace-normal gap-3 border-2 border-ink bg-paper px-6 py-4 font-mono text-base uppercase hover:bg-ink hover:text-paper brutal-shadow-pink">
+                <a href="https://tally.so/r/2EgQqL" target="_blank" rel="noreferrer">
+                  <CalendarDays className="w-4 h-4" /> Réserver un RDV
+                </a>
+              </Button>
             </div>
           </div>
           <motion.div
@@ -233,7 +237,7 @@ function Index() {
                 <dt className="uppercase text-xs opacity-80">Réservations</dt>
                 <dd className="mt-1">
                   Remplis le{" "}
-                  <a href="#questionnaire" className="underline decoration-2 underline-offset-4 hover:text-accent">questionnaire</a>
+                  <a href="https://tally.so/r/2EgQqL" target="_blank" rel="noreferrer" className="underline decoration-2 underline-offset-4 hover:text-accent">questionnaire de réservation</a>
                   , DM Instagram ou email. Réponse sous 48h.
                 </dd>
 

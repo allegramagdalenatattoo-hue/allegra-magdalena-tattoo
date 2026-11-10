@@ -18,7 +18,8 @@ export const Route = createFileRoute("/tattoos")({
       { property: "og:title", content: "Tatouages — Allegra Magdalena" },
       { property: "og:description", content: "Galerie de mes tatouages réalisés." },
       { property: "og:url", content: "https://allega-magdalena-tattoo.lovable.app/tattoos" },
-      { property: "og:image", content: t5 },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://allega-magdalena-tattoo.lovable.app/tattoos" }],
     scripts: [
@@ -59,7 +60,6 @@ function Tattoos() {
   return (
     <SiteShell>
       <section className="p-6 md:p-12 lg:p-16 border-b-2 border-ink">
-        <p className="font-mono text-xs uppercase tracking-widest mb-4">⟶ Archive · 01 / 06</p>
         <h1 className="font-display uppercase text-[16vw] lg:text-[10vw] leading-[0.85]">
           Tatou<motion.span animate={{ rotate: [0, -3, 3, 0] }} transition={{ duration: 0.6, repeat: Infinity, repeatDelay: 3 }} className="inline-block text-accent">·</motion.span>ages
         </h1>
