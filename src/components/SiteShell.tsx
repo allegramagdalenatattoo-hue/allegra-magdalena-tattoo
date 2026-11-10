@@ -144,7 +144,13 @@ export function SiteShell({ children }: { children: ReactNode }) {
           </div>
           <div className="font-mono text-xs uppercase opacity-70">
             © {new Date().getFullYear()} — Tous droits réservés.<br />Site brutaliste, fait à la main, sans pitié.
-            <br /><Link to="/admin" className="underline hover:text-[var(--accent-2)]">Admin</Link>
+            <br />
+            <Link
+              to="/admin"
+              className="mt-3 inline-flex items-center gap-2 border-2 border-paper px-3 py-1.5 font-mono text-xs uppercase hover:bg-paper hover:text-ink"
+            >
+              Admin
+            </Link>
           </div>
         </div>
       </footer>
