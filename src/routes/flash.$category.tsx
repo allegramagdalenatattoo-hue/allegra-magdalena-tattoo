@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, type ErrorComponentProps } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { ArrowLeft, Mail } from "lucide-react";
@@ -81,9 +81,11 @@ export const Route = createFileRoute("/flash/$category")({
       </div>
     </SiteShell>
   ),
-  errorComponent: ({ error }) => (
+  errorComponent: ({ error }: ErrorComponentProps) => (
     <SiteShell>
-      <div className="p-12 font-mono">{error.message}</div>
+      <div className="p-12 font-mono">
+        {error instanceof Error ? error.message : String(error)}
+      </div>
     </SiteShell>
   ),
   component: FlashCategory,
