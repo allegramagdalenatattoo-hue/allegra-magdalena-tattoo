@@ -12,7 +12,7 @@ export const Route = createFileRoute("/flash/")({
   head: () => ({
     meta: [
       { title: "Flash — Allegra Magdalena" },
-      { name: "description", content: "Propositions de dessins flash disponibles : nudité, botanique, corps, composition, animaux." },
+      { name: "description", content: `Propositions de dessins flash : ${CATEGORIES.map((c) => c.title).join(", ")}.` },
       { property: "og:title", content: "Flash — Allegra Magdalena" },
       { property: "og:description", content: "Dessins flash disponibles à tatouer." },
       { property: "og:url", content: "https://allega-magdalena-tattoo.lovable.app/flash" },
@@ -48,7 +48,7 @@ function FlashIndex() {
   return (
     <SiteShell>
       <section className="p-6 md:p-12 lg:p-16 border-b-2 border-ink">
-        <p className="font-mono text-xs uppercase tracking-widest mb-4">⟶ Flash disponibles · 5 catégories</p>
+        <p className="font-mono text-xs uppercase tracking-widest mb-4">⟶ Flash disponibles · {CATEGORIES.length} catégories</p>
         <h1 className="font-display uppercase text-[16vw] lg:text-[10vw] leading-[0.85]">
           Flash<span className="text-accent">.</span>
         </h1>
@@ -60,7 +60,9 @@ function FlashIndex() {
 
       <section className="p-4 md:p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {CATEGORIES.map((c, i) => (
+           {CATEGORIES.map((c, i) => {
+             const cover = photos.find((p) => p.section === coverSection(c.slug))?.image_url ?? c.cover;
+             return (
             <motion.div
               key={c.slug}
               initial={{ opacity: 0, y: 30 }}
@@ -74,8 +76,8 @@ function FlashIndex() {
                 className="block brutal-border group bg-paper hover:bg-ink hover:text-paper transition-colors"
               >
                 <div className="relative overflow-hidden border-b-2 border-ink aspect-[4/3] bg-paper">
-                  <motion.img
-                    src={photos.find((p) => p.section === coverSection(c.slug))?.image_url ?? c.cover}
+                   {cover ? <motion.img
+                     src={cover}
                     alt={`Flash tatouage ${c.title.toLowerCase()} — planche cover ${c.count} pièces`}
                     loading="lazy"
                     width={1024}
@@ -83,9 +85,11 @@ function FlashIndex() {
                     className="w-full h-full object-cover"
                     whileHover={{ scale: 1.05, rotate: -0.5 }}
                     transition={{ duration: 0.4 }}
-                  />
+                   /> : <div className="flex h-full items-center justify-center p-6 bg-muted text-ink">
+                     <span className="font-display uppercase text-3xl text-center break-words">{c.title}</span>
+                   </div>}
                   <div className="absolute top-2 left-2 bg-ink text-paper font-mono text-xs px-2 py-1 uppercase">
-                    {String(i + 1).padStart(2, "0")} / 05
+                     {String(i + 1).padStart(2, "0")} / {String(CATEGORIES.length).padStart(2, "0")}
                   </div>
                 </div>
                 <div className="flex items-center justify-between p-4">
@@ -101,7 +105,7 @@ function FlashIndex() {
                 </div>
               </Link>
             </motion.div>
-          ))}
+           ); })}
         </div>
       </section>
     </SiteShell>

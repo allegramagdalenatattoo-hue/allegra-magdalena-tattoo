@@ -101,13 +101,15 @@ function FlashCategory() {
         <div className="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-7">
             <p className="font-mono text-xs uppercase tracking-widest mb-3">⟶ Flash · {cat.title}</p>
-            <h1 className="font-display uppercase text-[16vw] lg:text-[9vw] leading-[0.85]">
+            <h1 className="font-display uppercase text-5xl md:text-7xl xl:text-8xl leading-[0.85] break-words">
               {cat.title}<span className="text-accent">.</span>
             </h1>
             <p className="mt-4 max-w-xl font-mono text-sm">{cat.desc}</p>
           </div>
           <div className="lg:col-span-5 brutal-border p-4">
-            <img src={cover} alt={`Planche cover flash ${cat.title.toLowerCase()} — ${count} dessins disponibles`} className="w-full h-64 object-cover border-b-2 border-ink" width={1024} height={1024} loading="lazy" />
+             {cover ? <img src={cover} alt={`Planche cover flash ${cat.title.toLowerCase()} — ${count} dessins disponibles`} className="w-full h-64 object-cover border-b-2 border-ink" width={1024} height={1024} loading="lazy" /> : <div className="flex h-64 items-center justify-center border-b-2 border-ink bg-muted p-6">
+               <span className="font-display uppercase text-3xl text-center break-words">{cat.title}</span>
+             </div>}
             <div className="font-mono text-xs uppercase pt-3 flex justify-between">
               <span>{count} pièces</span>
               <span>Cover sheet</span>
@@ -117,7 +119,7 @@ function FlashCategory() {
         </div>
       </section>
 
-      <PhotoViewer photos={pieces.map((p) => ({ src: p.image ?? cover, title: p.title }))}>
+       {count === 0 ? <section className="p-6 md:p-12"><p className="font-mono text-sm">Aucun flash pour le moment.</p></section> : <PhotoViewer photos={pieces.map((p) => ({ src: p.image ?? cover ?? "", title: p.title }))}>
         {(open) => <section className="p-4 md:p-8">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
           {pieces.map((p, i) => (
@@ -132,7 +134,7 @@ function FlashCategory() {
             >
               <Button variant="ghost" onClick={() => open(i)} aria-label={`Agrandir ${p.title}`} className="block h-auto w-full rounded-none p-0 hover:bg-paper">
                 <div className="aspect-square border-b-2 border-ink overflow-hidden bg-paper relative">
-                  <img src={p.image ?? cover} alt={`Dessin flash ${cat.title.toLowerCase()} ${p.title}`} loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
+                   <img src={p.image ?? cover ?? undefined} alt={`Dessin flash ${cat.title.toLowerCase()} ${p.title}`} loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
                 </div>
               </Button>
               <div className="p-3 font-mono text-xs uppercase break-words">{p.title}</div>
@@ -140,7 +142,7 @@ function FlashCategory() {
           ))}
         </div>
       </section>}
-      </PhotoViewer>
+       </PhotoViewer>}
     </SiteShell>
   );
 }
