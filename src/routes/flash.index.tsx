@@ -16,7 +16,8 @@ export const Route = createFileRoute("/flash/")({
       { property: "og:title", content: "Flash — Allegra Magdalena" },
       { property: "og:description", content: "Dessins flash disponibles à tatouer." },
       { property: "og:url", content: "https://allega-magdalena-tattoo.lovable.app/flash" },
-      { property: "og:image", content: CATEGORIES[3].cover },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://allega-magdalena-tattoo.lovable.app/flash" }],
     scripts: [

@@ -3,6 +3,8 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
 import { Instagram, Mail } from "lucide-react";
 import { SiteShell, EMAIL, IG_URL } from "@/components/SiteShell";
+import { PhotoViewer } from "@/components/PhotoViewer";
+import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/lib/flash-data";
 import { photosQueryOptions } from "@/lib/photos";
 import hero from "@/assets/hero.jpg";
@@ -24,7 +26,8 @@ export const Route = createFileRoute("/shop")({
       { property: "og:title", content: "Shop — Allegra Magdalena" },
       { property: "og:description", content: "Dessins originaux et objets en édition limitée." },
       { property: "og:url", content: "https://allega-magdalena-tattoo.lovable.app/shop" },
-      { property: "og:image", content: CATEGORIES[1].cover },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://allega-magdalena-tattoo.lovable.app/shop" }],
     scripts: [
@@ -43,13 +46,7 @@ export const Route = createFileRoute("/shop")({
             description: it.edition,
             image: `https://allega-magdalena-tattoo.lovable.app${it.img}`,
             brand: { "@type": "Person", name: "Allegra Magdalena" },
-            offers: {
-              "@type": "Offer",
-              price: it.priceNum,
-              priceCurrency: "EUR",
-              availability: "https://schema.org/InStock",
-              url: "https://allega-magdalena-tattoo.lovable.app/shop",
-            },
+
           })),
         }),
       },
@@ -92,7 +89,8 @@ function Shop() {
         </div>
       </section>
 
-      <section className="p-4 md:p-8">
+      <PhotoViewer photos={items.map((it) => ({ src: it.img, title: it.title }))}>
+        {(open) => <section className="p-4 md:p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {items.map((it, i) => (
             <motion.article
@@ -104,14 +102,15 @@ function Shop() {
               whileHover={{ y: -6 }}
               className="brutal-border bg-paper group"
             >
+              <Button variant="ghost" onClick={() => open(i)} aria-label={`Agrandir ${it.title}`} className="block h-auto w-full rounded-none p-0 hover:bg-paper">
               <div className="aspect-[4/5] border-b-2 border-ink overflow-hidden relative">
                 <motion.img src={it.img} alt={it.title} width={1024} height={1024} loading="lazy" className="w-full h-full object-cover" whileHover={{ scale: 1.05 }} transition={{ duration: 0.4 }} />
                 <div className="absolute top-2 left-2 bg-accent text-paper font-mono text-xs px-2 py-1 uppercase">{it.cat}</div>
               </div>
+              </Button>
               <div className="p-4">
                 <div className="flex items-baseline justify-between gap-2">
                   <h2 className="font-display uppercase text-xl leading-none">{it.title}</h2>
-                  <span className="font-display text-2xl shrink-0">{it.price}</span>
                 </div>
                 <p className="font-mono text-xs opacity-80 mt-2">{it.edition}</p>
                 <a
@@ -124,7 +123,8 @@ function Shop() {
             </motion.article>
           ))}
         </div>
-      </section>
+      </section>}
+      </PhotoViewer>
     </SiteShell>
   );
 }

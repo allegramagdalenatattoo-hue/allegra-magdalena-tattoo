@@ -8,6 +8,11 @@ export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
       { title: "Connexion — Allegra Magdalena" },
+      { name: "description", content: "Connexion à la gestion des photos d’Allegra Magdalena." },
+      { property: "og:title", content: "Connexion — Allegra Magdalena" },
+      { property: "og:description", content: "Accès personnel à la gestion des photos." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
     ],
   }),

@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
+import { PhotoViewer } from "@/components/PhotoViewer";
+import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/SiteShell";
 import { photosQueryOptions } from "@/lib/photos";
 import t1 from "@/assets/tattoo-1.jpg";
@@ -65,7 +67,8 @@ function Tattoos() {
         </h1>
       </section>
 
-      <section className="p-4 md:p-8">
+      <PhotoViewer photos={items.map((it) => ({ src: it.src, title: it.title }))}>
+        {(open) => <section className="p-4 md:p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {items.map((it, i) => (
             <motion.figure
@@ -77,6 +80,7 @@ function Tattoos() {
               whileHover={{ y: -6 }}
               className="brutal-border bg-paper group"
             >
+              <Button variant="ghost" onClick={() => open(i)} aria-label={`Agrandir ${it.title}`} className="block h-auto w-full rounded-none p-0 hover:bg-paper">
               <div className="relative overflow-hidden border-b-2 border-ink aspect-[4/5]">
                 <motion.img
                   src={it.src}
@@ -92,6 +96,7 @@ function Tattoos() {
                   N°{String(i + 1).padStart(2, "0")}
                 </div>
               </div>
+              </Button>
               <figcaption className="flex items-baseline justify-between p-4">
                 <div>
                   <div className="font-display uppercase text-xl leading-none">{it.title}</div>
@@ -102,7 +107,8 @@ function Tattoos() {
             </motion.figure>
           ))}
         </div>
-      </section>
+      </section>}
+      </PhotoViewer>
     </SiteShell>
   );
 }

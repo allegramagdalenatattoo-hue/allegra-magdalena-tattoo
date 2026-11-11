@@ -13,6 +13,11 @@ export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [
       { title: "Admin — Allegra Magdalena" },
+      { name: "description", content: "Gestion des photos et galeries d’Allegra Magdalena." },
+      { property: "og:title", content: "Admin — Allegra Magdalena" },
+      { property: "og:description", content: "Espace personnel de gestion des galeries." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
     ],
   }),

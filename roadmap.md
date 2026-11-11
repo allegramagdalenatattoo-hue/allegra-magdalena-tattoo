@@ -1,0 +1,3 @@
+- [x] Retirer les prix et les commandes de réservation des flashs, et masquer les prix de la boutique.
+- [x] Agrandir les photos et naviguer entre elles sur ordinateur et téléphone.
+- [x] Vérifier les galeries et enregistrer les modifications.

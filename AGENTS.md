@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Use the shared PhotoViewer for public photo galleries so enlargement, keyboard navigation, and touch navigation stay consistent without changing stored photo metadata.
