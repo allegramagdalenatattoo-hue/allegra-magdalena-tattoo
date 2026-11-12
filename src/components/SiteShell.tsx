@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Instagram, Mail, Asterisk } from "lucide-react";
 import { type ReactNode, useState } from "react";
-import { FloatingCats } from "@/components/CatGifs";
+import { CAT_GIFS, FloatingCats } from "@/components/CatGifs";
 
 const NAV = [
   { to: "/", label: "ACCUEIL" },
@@ -28,8 +28,7 @@ function Marquee({
     "✷ FINE LINE & FLASH",
     "✦ אלגרה מגדלנה",
     "☠ BOOK NOW",
-    "✺ TEL AVIV / WORLD",
-    "✱ NO RULES",
+    "✺ PARIS / WORLD",
     "❂ INK ON SKIN",
   ];
   const row = [...items, ...items, ...items];
@@ -77,9 +76,12 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
       <header className="sticky top-0 z-40 bg-paper border-b-2 border-ink">
         <div className="flex items-center justify-between px-4 md:px-8 py-3">
-          <Link to="/" className="font-display text-xl md:text-2xl uppercase leading-none hover:animate-glitch">
-            Allegra<br />Magdalena
-          </Link>
+          <div className="flex items-center gap-2">
+            <img src={CAT_GIFS[0].url} alt="" className="h-12 w-12 object-contain md:h-14 md:w-14" />
+            <Link to="/" className="font-display text-xl md:text-2xl uppercase leading-none hover:animate-glitch">
+              Allegra<br />Magdalena
+            </Link>
+          </div>
           <nav className="hidden md:flex items-center gap-1">
             {NAV.map((n, i) => (
               <Link

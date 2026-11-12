@@ -4,7 +4,6 @@ import { motion } from "motion/react";
 import { Instagram, Mail, ArrowRight, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteShell, IG_URL, EMAIL } from "@/components/SiteShell";
-import { CAT_GIFS } from "@/components/CatGifs";
 import { photosQueryOptions } from "@/lib/photos";
 import hero from "@/assets/hero.jpg";
 
@@ -52,29 +51,22 @@ function Index() {
       <section className="relative border-b-2 border-ink overflow-hidden">
         {/* floating tags */}
         <motion.div
-          className="absolute top-6 right-6 z-20 bg-[var(--accent-2)] border-2 border-ink px-3 py-1 font-mono text-xs uppercase rotate-[8deg]"
-          animate={{ rotate: [8, -4, 8] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        >
-          ✱ Nouveaux flash !!
-        </motion.div>
-        <motion.div
           className="absolute bottom-6 left-6 z-20 bg-[var(--accent-3)] border-2 border-ink px-3 py-1 font-mono text-xs uppercase -rotate-6 animate-blink"
         >
           ⚡ Walk-ins parfois
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-          <div className="lg:col-span-7 p-6 md:p-12 lg:p-16 relative">
+          <div className="lg:col-span-7 p-6 md:p-12 lg:p-16 relative [container-type:inline-size]">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               className="font-mono text-xs uppercase tracking-widest mb-6 inline-block bg-ink text-paper px-2 py-1"
             >
-              ⟶ Tattoo artist · since 2019 · TLV
+              ⟶ Tattoo artist · since 2020 · Paris
             </motion.div>
-            <h1 className="font-display uppercase text-[13vw] lg:text-[10vw] leading-[0.82] tracking-tighter">
+            <h1 className="font-display uppercase text-[14cqw] lg:text-[12cqw] leading-[0.82] tracking-normal">
               <motion.span
                 initial={{ x: -60, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -119,6 +111,13 @@ function Index() {
             className="lg:col-span-5 relative border-t-2 lg:border-t-0 lg:border-l-2 border-ink min-h-[400px] lg:min-h-[600px] overflow-hidden"
           >
             <img src={heroSrc} alt="Allegra Magdalena tatouant" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1024} />
+            <motion.div
+              className="absolute top-16 right-6 z-20 bg-accent-2 border-2 border-ink px-3 py-1 font-mono text-xs uppercase rotate-[8deg] md:top-6"
+              animate={{ rotate: [8, -4, 8] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              ✱ Nouveaux flash !!
+            </motion.div>
             <div className="absolute inset-0 scanlines pointer-events-none mix-blend-multiply opacity-60" />
             <motion.div
               animate={{ rotate: [0, 360] }}
@@ -135,15 +134,6 @@ function Index() {
               ▶ live · atelier
             </motion.div>
           </motion.div>
-          {/* inline cats on hero corner */}
-          <motion.img
-            src={CAT_GIFS[0].url}
-            alt=""
-            initial={{ scale: 0 }}
-            animate={{ scale: 1, rotate: [0, 8, -8, 0] }}
-            transition={{ rotate: { duration: 3, repeat: Infinity } }}
-            className="absolute -bottom-6 left-1/2 -translate-x-1/2 lg:left-[55%] w-24 h-24 z-20 pointer-events-none"
-          />
         </div>
       </section>
 

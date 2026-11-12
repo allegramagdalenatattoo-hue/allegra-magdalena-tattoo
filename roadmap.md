@@ -3,3 +3,6 @@
 - [x] Vérifier les galeries et enregistrer les modifications.
 - [x] Ajouter les sept nouvelles sous-catégories aux Flash et à leur gestion Admin.
 - [x] Vérifier l’ouverture des nouvelles catégories et leur affichage sur téléphone.
+- [x] Mettre « Since 2020 · Paris » et « Paris / World », et retirer « NO RULE ».
+- [x] Placer le GIF du chat en haut à gauche à côté du nom.
+- [x] Afficher entièrement « Allegra Magdalena Tattoo! » sur ordinateur sans chevauchement avec la photo.
