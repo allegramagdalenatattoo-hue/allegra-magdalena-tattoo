@@ -11,3 +11,4 @@
 
 - Use the shared PhotoViewer for public photo galleries so enlargement, keyboard navigation, and touch navigation stay consistent without changing stored photo metadata.
 - Keep Flash categories in one shared catalog for public galleries, admin selectors, photo section slugs, and the sitemap; new categories start empty with optional covers rather than invented drawings.
+- Render desktop and mobile Flash navigation through the same catalog-driven dropdown in SiteShell so category links stay consistent and keyboard-accessible.

@@ -1,8 +1,11 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { Instagram, Mail, Asterisk } from "lucide-react";
+import { Instagram, Mail, Asterisk, ChevronDown, Menu, X } from "lucide-react";
 import { type ReactNode, useState } from "react";
 import { CAT_GIFS, FloatingCats } from "@/components/CatGifs";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
+import { CATEGORIES } from "@/lib/flash-data";
 
 const NAV = [
   { to: "/", label: "ACCUEIL" },
@@ -13,6 +16,30 @@ const NAV = [
 
 export const IG_URL = "https://instagram.com/tal_allegra_magdalena";
 export const EMAIL = "allegra.magdalena.tattoo@gmail.com";
+
+function FlashMenu({ mobile = false, onNavigate }: { mobile?: boolean; onNavigate?: () => void }) {
+  const active = useLocation({ select: (location) => location.pathname.startsWith("/flash") });
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className={`${mobile ? "w-full justify-between px-4 py-3 text-xl font-display border-b-2 border-ink" : "px-4 py-2 font-mono text-sm border-2 rotate-[1.5deg]"} h-auto rounded-none uppercase ${active ? "border-ink bg-accent text-paper" : "border-transparent hover:border-ink hover:bg-ink hover:text-paper"}`}>
+          FLASH <ChevronDown aria-hidden="true" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" sideOffset={6} className="w-60 max-w-[calc(100vw-2rem)] rounded-none border-2 border-ink bg-paper text-ink p-1 brutal-shadow">
+        <DropdownMenuItem asChild className="rounded-none px-3 py-2.5 font-mono uppercase focus:bg-ink focus:text-paper">
+          <Link to="/flash" onClick={onNavigate}>Tous les flashs</Link>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator className="bg-ink" />
+        {CATEGORIES.map((category) => (
+          <DropdownMenuItem key={category.slug} asChild className="rounded-none px-3 py-2.5 font-mono uppercase focus:bg-accent-2 focus:text-ink">
+            <Link to="/flash/$category" params={{ category: category.slug }} onClick={onNavigate}>{category.title}</Link>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 function Marquee({
   reverse = false,
@@ -84,7 +111,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           </div>
           <nav className="hidden md:flex items-center gap-1">
             {NAV.map((n, i) => (
-              <Link
+              n.to === "/flash" ? <FlashMenu key={n.to} /> : <Button key={n.to} asChild variant="ghost" className="h-auto rounded-none p-0 hover:bg-transparent"><Link
                 key={n.to}
                 to={n.to}
                 className={`px-4 py-2 font-mono text-sm uppercase border-2 border-transparent hover:border-ink hover:bg-ink hover:text-paper transition-colors ${i % 2 ? "rotate-[-1.5deg]" : "rotate-[1.5deg]"}`}
@@ -92,22 +119,22 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 activeOptions={{ exact: n.to === "/" }}
               >
                 {n.label}
-              </Link>
+              </Link></Button>
             ))}
             <a href={IG_URL} target="_blank" rel="noreferrer" aria-label="Instagram — @tal_allegra_magdalena" className="ml-2 px-3 py-2 border-2 border-ink hover:bg-accent hover:border-accent hover:text-paper transition-colors animate-wobble">
               <Instagram className="w-4 h-4" aria-hidden="true" />
             </a>
           </nav>
-          <button onClick={() => setOpen(!open)} className="md:hidden border-2 border-ink px-3 py-2 font-mono text-sm uppercase animate-jitter">
-            {open ? "X" : "MENU"}
-          </button>
+          <Button variant="outline" size="icon" onClick={() => setOpen(!open)} aria-label={open ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={open} className="md:hidden rounded-none border-2 border-ink">
+            {open ? <X /> : <Menu />}
+          </Button>
         </div>
         {open && (
           <div className="md:hidden border-t-2 border-ink flex flex-col">
             {NAV.map((n) => (
-              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="px-4 py-3 font-display uppercase text-xl border-b-2 border-ink hover:bg-ink hover:text-paper">
+              n.to === "/flash" ? <FlashMenu key={n.to} mobile onNavigate={() => setOpen(false)} /> : <Button key={n.to} asChild variant="ghost" className="h-auto rounded-none justify-start px-4 py-3 font-display uppercase text-xl border-b-2 border-ink hover:bg-ink hover:text-paper"><Link to={n.to} onClick={() => setOpen(false)}>
                 {n.label}
-              </Link>
+              </Link></Button>
             ))}
             <a href={IG_URL} target="_blank" rel="noreferrer" className="px-4 py-3 font-display uppercase text-xl flex items-center gap-2">
               <Instagram className="w-5 h-5" /> INSTAGRAM

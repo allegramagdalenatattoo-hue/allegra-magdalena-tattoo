@@ -57,7 +57,7 @@ function Index() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-          <div className="lg:col-span-7 p-6 md:p-12 lg:p-16 relative [container-type:inline-size]">
+          <div className="lg:col-span-7 p-6 md:p-12 relative [container-type:inline-size]">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -66,7 +66,7 @@ function Index() {
             >
               ⟶ Tattoo artist · since 2020 · Paris
             </motion.div>
-            <h1 className="font-display uppercase text-[14cqw] lg:text-[12cqw] leading-[0.82] tracking-normal">
+            <h1 className="font-display uppercase text-[13.5cqw] leading-[0.82] tracking-normal">
               <motion.span
                 initial={{ x: -60, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -112,26 +112,25 @@ function Index() {
           >
             <img src={heroSrc} alt="Allegra Magdalena tatouant" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1024} />
             <motion.div
-              className="absolute top-16 right-6 z-20 bg-accent-2 border-2 border-ink px-3 py-1 font-mono text-xs uppercase rotate-[8deg] md:top-6"
+              className="absolute top-6 right-6 z-20"
               animate={{ rotate: [8, -4, 8] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              ✱ Nouveaux flash !!
+              <Button asChild variant="outline" className="h-auto rounded-none bg-accent-2 border-2 border-ink px-3 py-2 font-mono text-xs uppercase hover:bg-ink hover:text-paper">
+                <Link to="/flash/$category" params={{ category: "new-flash" }}>✱ Nouveaux flash !!</Link>
+              </Button>
             </motion.div>
             <div className="absolute inset-0 scanlines pointer-events-none mix-blend-multiply opacity-60" />
             <motion.div
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute bottom-4 right-4 w-28 h-28 bg-accent text-paper rounded-full flex items-center justify-center font-display uppercase text-xs text-center border-2 border-ink"
+              className="absolute bottom-4 right-4"
             >
-              Book<br />Now ✷
-            </motion.div>
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute top-4 left-4 bg-paper border-2 border-ink px-2 py-1 font-mono text-[10px] uppercase rotate-[-6deg]"
-            >
-              ▶ live · atelier
+              <Button asChild className="w-28 h-28 p-0 rounded-full bg-accent text-paper font-display uppercase text-xs text-center border-2 border-ink hover:bg-ink">
+                <a href="https://tally.so/r/2EgQqL" target="_blank" rel="noreferrer" aria-label="Book Now — Questionnaire de réservation">
+                  <span>Book<br />Now ✷</span>
+                </a>
+              </Button>
             </motion.div>
           </motion.div>
         </div>
