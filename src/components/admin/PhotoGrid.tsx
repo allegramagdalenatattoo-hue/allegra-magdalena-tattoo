@@ -14,6 +14,7 @@ import { GripVertical, Plus, Save, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import type { Photo } from "@/lib/photos";
+import { localPhotoUrl } from "@/lib/static-photo-catalog";
 
 const STATUSES = ["Disponible", "Réservé", "Vendu"];
 
@@ -219,7 +220,7 @@ function SortableCard({
       className={`brutal-border bg-paper ${isDragging ? "opacity-60 rotate-2 z-30 relative" : ""}`}
     >
       <div className="relative aspect-[4/3] border-b-2 border-ink overflow-hidden bg-ink/5">
-        <img src={photo.image_url} alt={photo.title} className="w-full h-full object-cover" loading="lazy" />
+        <img src={localPhotoUrl(photo)} alt={photo.title} className="w-full h-full object-cover" loading="lazy" />
         <button
           {...attributes}
           {...listeners}

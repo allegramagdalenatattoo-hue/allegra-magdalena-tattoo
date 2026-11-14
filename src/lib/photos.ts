@@ -2,6 +2,7 @@ import { queryOptions } from "@tanstack/react-query";
 import type { Tables } from "@/integrations/supabase/types";
 import { getPhotos } from "./photos.functions";
 import { CATEGORIES } from "./flash-data";
+import { staticPhotosFor } from "./static-photo-catalog";
 
 export type Photo = Tables<"photos">;
 
@@ -18,7 +19,9 @@ export function flashSection(slug: string) {
 export const photosQueryOptions = (sections: string[]) =>
   queryOptions({
     queryKey: ["photos", ...sections],
-    queryFn: () => getPhotos({ data: { sections } }),
+    queryFn: () => import.meta.env.VITE_STATIC_PHOTOS === "true"
+      ? Promise.resolve(staticPhotosFor(sections))
+      : getPhotos({ data: { sections } }),
   });
 
 export function photoFor(photos: Photo[], section: string): Photo | undefined {

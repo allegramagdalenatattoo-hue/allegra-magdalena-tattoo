@@ -110,7 +110,7 @@ function Index() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-5 relative border-t-2 lg:border-t-0 lg:border-l-2 border-ink min-h-[400px] lg:min-h-[600px] overflow-hidden"
           >
-            <img src={heroSrc} alt="Allegra Magdalena tatouant" className="absolute inset-0 w-full h-full object-cover" width={1024} height={1024} />
+            <img src={heroSrc} alt="Allegra Magdalena tatouant" className="absolute inset-0 w-full h-full object-cover object-top lg:object-center" width={1024} height={1024} />
             <motion.div
               className="absolute top-6 right-6 z-20"
               animate={{ rotate: [8, -4, 8] }}
@@ -124,7 +124,7 @@ function Index() {
             <motion.div
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute bottom-4 right-4"
+              className="absolute bottom-4 left-4"
             >
               <Button asChild className="w-28 h-28 p-0 rounded-full bg-accent text-paper font-display uppercase text-xs text-center border-2 border-ink hover:bg-ink">
                 <a href="https://tally.so/r/2EgQqL" target="_blank" rel="noreferrer" aria-label="Book Now — Questionnaire de réservation">

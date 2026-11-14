@@ -2,10 +2,14 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { createPublicClient } from "./photos.server";
+import { localPhotoUrl, staticPhotosFor } from "./static-photo-catalog";
 
 export const getPhotos = createServerFn({ method: "GET" })
   .inputValidator((data) => z.object({ sections: z.array(z.string()).min(1) }).parse(data))
   .handler(async ({ data }) => {
+    if (process.env.VERCEL === "1" || process.env.STATIC_PHOTOS === "true") {
+      return staticPhotosFor(data.sections);
+    }
     const supabase = createPublicClient();
     const { data: rows, error } = await supabase
       .from("photos")
@@ -14,7 +18,7 @@ export const getPhotos = createServerFn({ method: "GET" })
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: true });
     if (error) throw new Error(error.message);
-    return rows;
+    return rows.map((row) => ({ ...row, image_url: localPhotoUrl(row) }));
   });
 
 // Grants the admin role to the caller only when no admin exists yet (first account wins),

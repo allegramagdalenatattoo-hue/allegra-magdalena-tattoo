@@ -6,7 +6,9 @@
 - [x] Mettre « Since 2020 · Paris » et « Paris / World », et retirer « NO RULE ».
 - [x] Placer le GIF du chat en haut à gauche à côté du nom.
 - [x] Afficher entièrement « Allegra Magdalena Tattoo! » sur ordinateur sans chevauchement avec la photo.
-- [ ] Agrandir le titre à une taille intermédiaire sans masquer le nom.
-- [ ] Ajouter un menu déroulant Flash avec toutes les sous-catégories sur ordinateur et téléphone.
-- [ ] Relier Book Now au questionnaire Tally, retirer Live atelier et relier Nouveaux flash à New flash.
-- [ ] Vérifier les liens, le menu et la présentation sur ordinateur et téléphone.
+- [x] Agrandir le titre à une taille intermédiaire sans masquer le nom.
+- [x] Ajouter un menu déroulant Flash avec toutes les sous-catégories sur ordinateur et téléphone.
+- [x] Relier Book Now au questionnaire Tally, retirer Live atelier et relier Nouveaux flash à New flash.
+- [x] Vérifier les liens, le menu et la présentation sur ordinateur et téléphone.
+- [x] Rendre les 770 photos actuelles autonomes sur Vercel avec des fichiers statiques locaux et sans appels /api/public/photos/.
+- [x] Corriger le cadrage de la photo d’accueil sur téléphone pour montrer la tête.
