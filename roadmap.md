@@ -12,3 +12,4 @@
 - [x] Vérifier les liens, le menu et la présentation sur ordinateur et téléphone.
 - [x] Rendre les 770 photos actuelles autonomes sur Vercel avec des fichiers statiques locaux et sans appels /api/public/photos/.
 - [x] Corriger le cadrage de la photo d’accueil sur téléphone pour montrer la tête.
+- [x] Rendre le GIF du chat autonome avec un fichier animé statique local.

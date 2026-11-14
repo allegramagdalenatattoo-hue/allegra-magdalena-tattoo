@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import cat from "@/assets/cats/giphy-11.gif.asset.json";
-
-export const CAT_GIFS = [cat];
+export const CAT_GIFS = [{ url: "/gifs/cat.gif" }];
 
 export function CatGif({
   src,
