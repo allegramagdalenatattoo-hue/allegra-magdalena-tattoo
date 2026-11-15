@@ -14,3 +14,4 @@
 - Render desktop and mobile Flash navigation through the same catalog-driven dropdown in SiteShell so category links stay consistent and keyboard-accessible.
 - Keep exported gallery files in public/photos with a typed snapshot catalog; Vercel or explicit static-photo mode reads that snapshot without Cloud access, while Cloud retains live photo administration and resolves exported photo IDs to local URLs.
 - Keep decorative GIFs in public/gifs and reference their static paths so animation works on Vercel without Lovable asset serving.
+- Mount Vercel Analytics once in the root route component so all pages share visit tracking without duplicate scripts.
