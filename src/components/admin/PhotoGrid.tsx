@@ -22,10 +22,11 @@ type Props = {
   section: string;
   showPrice?: boolean;
   showSubtitle?: boolean;
+  showStatus?: boolean;
   hint?: string;
 };
 
-export function PhotoGrid({ section, showPrice = false, showSubtitle = true, hint }: Props) {
+export function PhotoGrid({ section, showPrice = false, showSubtitle = true, showStatus = true, hint }: Props) {
   const queryClient = useQueryClient();
   const queryKey = ["admin-photos", section];
   const { data, isPending } = useQuery({
@@ -158,6 +159,7 @@ export function PhotoGrid({ section, showPrice = false, showSubtitle = true, hin
                   photo={p}
                   showPrice={showPrice}
                   showSubtitle={showSubtitle}
+                  showStatus={showStatus}
                   onDelete={() => onDelete(p)}
                   onSaved={invalidate}
                 />
@@ -174,12 +176,14 @@ function SortableCard({
   photo,
   showPrice,
   showSubtitle,
+  showStatus,
   onDelete,
   onSaved,
 }: {
   photo: Photo;
   showPrice: boolean;
   showSubtitle: boolean;
+  showStatus: boolean;
   onDelete: () => void;
   onSaved: () => void;
 }) {
@@ -229,7 +233,7 @@ function SortableCard({
         >
           <GripVertical className="w-4 h-4" />
         </button>
-        {status !== "Disponible" && (
+        {showStatus && status !== "Disponible" && (
           <span className="absolute top-2 right-2 bg-accent text-paper font-mono text-[10px] uppercase px-2 py-1 rotate-3">
             {status}
           </span>
@@ -255,33 +259,37 @@ function SortableCard({
             />
           </label>
         )}
-        <div className="flex gap-2">
-          {showPrice && (
-            <label className="block flex-1">
-              <span className="text-[10px] uppercase opacity-70">Prix</span>
-              <input
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                placeholder="120 €"
-                className="mt-0.5 w-full border-2 border-ink bg-paper px-2 py-1 text-sm outline-none focus:bg-[var(--accent-2)]"
-              />
-            </label>
-          )}
-          <label className="block flex-1">
-            <span className="text-[10px] uppercase opacity-70">Statut</span>
-            <select
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-              className="mt-0.5 w-full border-2 border-ink bg-paper px-2 py-1.5 text-sm outline-none"
-            >
-              {STATUSES.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
+        {(showPrice || showStatus) && (
+          <div className="flex gap-2">
+            {showPrice && (
+              <label className="block flex-1">
+                <span className="text-[10px] uppercase opacity-70">Prix</span>
+                <input
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  placeholder="120 €"
+                  className="mt-0.5 w-full border-2 border-ink bg-paper px-2 py-1 text-sm outline-none focus:bg-[var(--accent-2)]"
+                />
+              </label>
+            )}
+            {showStatus && (
+              <label className="block flex-1">
+                <span className="text-[10px] uppercase opacity-70">Statut</span>
+                <select
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                  className="mt-0.5 w-full border-2 border-ink bg-paper px-2 py-1.5 text-sm outline-none"
+                >
+                  {STATUSES.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
+          </div>
+        )}
 
         <div className="flex gap-2 pt-1">
           <button

@@ -99,6 +99,7 @@ function AdminPage() {
             {tab === "tattoos" && (
               <PhotoGrid
                 section="tattoos"
+                showStatus={false}
                 hint="La galerie de la page Tatouages. Sous-titre = emplacement · année (ex : Avant-bras · 2024)."
               />
             )}
