@@ -7,6 +7,7 @@ import { PhotoViewer } from "@/components/PhotoViewer";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/lib/flash-data";
 import { photosQueryOptions, coverSection, flashSection } from "@/lib/photos";
+import { sortPhotosByNameDescending } from "@/lib/photo-sort";
 
 function buildPieces(cat: (typeof CATEGORIES)[number]) {
   return Array.from({ length: cat.count }, (_, i) => ({
@@ -80,13 +81,13 @@ function FlashCategory() {
   const { data: photos } = useSuspenseQuery(photosQueryOptions(sectionsFor(cat.slug)));
   const dbPieces = photos.filter((p) => p.section === flashSection(cat.slug));
   const cover = photos.find((p) => p.section === coverSection(cat.slug))?.image_url ?? cat.cover;
-  const pieces = dbPieces.length
+  const pieces = sortPhotosByNameDescending(dbPieces.length
     ? dbPieces.map((p) => ({
         id: p.id,
         title: p.title || cat.title,
         image: p.image_url as string | null,
       }))
-    : buildPieces(cat);
+    : buildPieces(cat));
   const count = pieces.length;
 
 

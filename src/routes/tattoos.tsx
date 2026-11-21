@@ -5,6 +5,7 @@ import { PhotoViewer } from "@/components/PhotoViewer";
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/SiteShell";
 import { photosQueryOptions } from "@/lib/photos";
+import { sortPhotosByNameDescending } from "@/lib/photo-sort";
 import t1 from "@/assets/tattoo-1.jpg";
 import t2 from "@/assets/tattoo-2.jpg";
 import t3 from "@/assets/tattoo-3.jpg";
@@ -53,12 +54,12 @@ const ITEMS = [
 
 function Tattoos() {
   const { data: photos } = useSuspenseQuery(photosQueryOptions(["tattoos"]));
-  const items = photos.length
+  const items = sortPhotosByNameDescending(photos.length
     ? photos.map((p) => {
         const [placement = "", year = ""] = p.subtitle.split("·").map((s) => s.trim());
         return { src: p.image_url, title: p.title, placement, year };
       })
-    : ITEMS;
+    : ITEMS);
   return (
     <SiteShell>
       <section className="p-6 md:p-12 lg:p-16 border-b-2 border-ink">

@@ -7,6 +7,7 @@ import { PhotoViewer } from "@/components/PhotoViewer";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/lib/flash-data";
 import { photosQueryOptions } from "@/lib/photos";
+import { sortPhotosByNameDescending } from "@/lib/photo-sort";
 import hero from "@/assets/hero.jpg";
 
 const ITEMS = [
@@ -59,7 +60,7 @@ export const Route = createFileRoute("/shop")({
 
 function Shop() {
   const { data: photos } = useSuspenseQuery(photosQueryOptions(["shop"]));
-  const items = photos.length
+  const items = sortPhotosByNameDescending(photos.length
     ? photos.map((p) => ({
         title: p.title,
         cat: p.status === "Disponible" ? "Shop" : p.status,
@@ -67,7 +68,7 @@ function Shop() {
         img: p.image_url,
         edition: p.subtitle,
       }))
-    : ITEMS;
+    : ITEMS);
   return (
     <SiteShell>
       <section className="p-6 md:p-12 lg:p-16 border-b-2 border-ink">
