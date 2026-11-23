@@ -14,3 +14,7 @@
 - [x] Corriger le cadrage de la photo d’accueil sur téléphone pour montrer la tête.
 - [x] Rendre le GIF du chat autonome avec un fichier animé statique local.
 - [x] Remplacer Google Tag Manager par la balise officielle Google Analytics G-7SLJVH0VEN et vérifier son chargement.
+- [ ] Charger les photos en direct sur Lovable et Vercel avec actualisation en temps réel.
+- [ ] Simplifier l’Admin : ajout, modification, suppression et remplacement des visuels.
+- [ ] Gérer les catégories Flash / Tatouages et préparer les articles du blog.
+- [ ] Vérifier les accès et les modifications depuis un compte administrateur, puis enregistrer.
