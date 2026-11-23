@@ -8,6 +8,13 @@
       "when": 1794333591595,
       "tag": "0000_restore_admin_role_function_execute",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795414356377,
+      "tag": "0001_live_gallery_categories_and_blog",
+      "breakpoints": true
     }
   ]
 }

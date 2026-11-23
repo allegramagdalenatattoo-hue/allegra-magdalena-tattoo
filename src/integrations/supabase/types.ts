@@ -14,9 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_articles: {
+        Row: {
+          article_date: string
+          content: Json
+          cover_path: string | null
+          id: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          article_date?: string
+          content?: Json
+          cover_path?: string | null
+          id?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          article_date?: string
+          content?: Json
+          cover_path?: string | null
+          id?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      gallery_categories: {
+        Row: {
+          description: string
+          id: string
+          kind: string
+          slug: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          description?: string
+          id?: string
+          kind: string
+          slug: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          description?: string
+          id?: string
+          kind?: string
+          slug?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
       photos: {
         Row: {
+          category_id: string | null
           created_at: string
+          description: string
+          external_url: string
           id: string
           image_url: string
           price: string | null
@@ -28,7 +88,10 @@ export type Database = {
           title: string
         }
         Insert: {
+          category_id?: string | null
           created_at?: string
+          description?: string
+          external_url?: string
           id?: string
           image_url: string
           price?: string | null
@@ -40,7 +103,10 @@ export type Database = {
           title?: string
         }
         Update: {
+          category_id?: string | null
           created_at?: string
+          description?: string
+          external_url?: string
           id?: string
           image_url?: string
           price?: string | null
@@ -51,7 +117,15 @@ export type Database = {
           subtitle?: string
           title?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "photos_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "gallery_categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {

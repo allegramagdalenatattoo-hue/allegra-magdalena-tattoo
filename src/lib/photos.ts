@@ -2,7 +2,7 @@ import { queryOptions } from "@tanstack/react-query";
 import type { Tables } from "@/integrations/supabase/types";
 import { getPhotos } from "./photos.functions";
 import { CATEGORIES } from "./flash-data";
-import { staticPhotosFor } from "./static-photo-catalog";
+import { loadLivePhotos } from "./gallery-live";
 
 export type Photo = Tables<"photos">;
 
@@ -19,9 +19,13 @@ export function flashSection(slug: string) {
 export const photosQueryOptions = (sections: string[]) =>
   queryOptions({
     queryKey: ["photos", ...sections],
-    queryFn: () => import.meta.env.VITE_STATIC_PHOTOS === "true"
-      ? Promise.resolve(staticPhotosFor(sections))
-      : getPhotos({ data: { sections } }),
+    queryFn: async () => {
+      if (typeof window === "undefined") return getPhotos({ data: { sections } });
+      const { supabase } = await import("@/integrations/supabase/client");
+      return loadLivePhotos(supabase, sections, import.meta.env.VITE_SUPABASE_URL);
+    },
+    staleTime: 0,
+    refetchInterval: 30 * 60 * 1000,
   });
 
 export function photoFor(photos: Photo[], section: string): Photo | undefined {

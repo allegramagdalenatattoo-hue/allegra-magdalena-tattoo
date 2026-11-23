@@ -7,8 +7,9 @@ function isOpaqueKey(value: string): boolean {
 
 // Server-only publishable client for public reads (RLS applies as anon).
 export function createPublicClient() {
-  const url = process.env.SUPABASE_URL!;
-  const key = process.env.SUPABASE_PUBLISHABLE_KEY!;
+  const url = process.env['SUPABASE_URL'] ?? import.meta.env.VITE_SUPABASE_URL;
+  const key = process.env['SUPABASE_PUBLISHABLE_KEY'] ?? process.env['SUPABASE_ANON_KEY'] ?? import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? import.meta.env.VITE_SUPABASE_ANON_KEY;
+  if (!url || !key) throw new Error("La connexion aux galeries n’est pas configurée.");
   return createClient<Database>(url, key, {
     global: {
       fetch: (input, init) => {
