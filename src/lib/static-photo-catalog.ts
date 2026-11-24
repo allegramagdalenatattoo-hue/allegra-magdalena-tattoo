@@ -1,7 +1,7 @@
 import type { Tables } from "@/integrations/supabase/types";
 import catalog from "./static-photos.json";
 
-const photos: Tables<"photos">[] = catalog;
+const photos: Tables<"photos">[] = catalog.map((photo) => ({ ...photo, category_id: null, description: "", external_url: "" }));
 
 export function staticPhotosFor(sections: string[]) {
   return photos.filter((photo) => sections.includes(photo.section));
